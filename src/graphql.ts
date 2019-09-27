@@ -1,4 +1,4 @@
-import { ApolloServer, makeExecutableSchema } from "apollo-server-express";
+import { ApolloServer } from "apollo-server-express";
 import { Express } from "express";
 import * as http from "http";
 import { inject, injectable } from "inversify";
@@ -6,9 +6,10 @@ import { Types } from "./ioc/types";
 import schema from "./schema";
 import resolvers from "./resolvers";
 import responseCachePlugin from "apollo-server-plugin-response-cache";
-import { IContentConnector } from "./graph/content/content.interface";
+import { IContentService } from "./graph/content/content.interface";
 import { IDataSources } from "./graph/context/context.interface";
 import { buildFederatedSchema } from '@apollo/federation';
+import { ContentConnector } from "./graph/content/content.connector";
 
 @injectable()
 export class GraphqlServer {
@@ -19,7 +20,7 @@ export class GraphqlServer {
   private serverInstance: http.Server;
 
   constructor(
-    @inject(Types.ContentConnector) private contentConnector: IContentConnector
+    @inject(Types.ContentService) private contentService: IContentService
   ) {}
 
   public async start(): Promise<void> {
@@ -35,8 +36,8 @@ export class GraphqlServer {
         //we will pass in the auth from the gateway if needed
       },
       dataSources: (): any => {
-        return <IDataSources>{
-          contentConnector: this.contentConnector
+        return <IDataSources> {
+          contentConnector: new ContentConnector(this.contentService)
         };
       },
       plugins: [
