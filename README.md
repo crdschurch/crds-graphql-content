@@ -1,6 +1,6 @@
 # crds-graphql-content
 
-Central GraphQL service to consume and graph all data micro services. Built and deployed to Kubernetes via TeamCity.
+Content GraphQL service for returning data from our CMS. This will be consumed ONLY by the graphql gateway. Do not make any client calls directly to this service. They should all flow through the gateway.
 
 ## Quick Start
 It is recommended that you first become familiar with graphql theory and implementation here (https://www.apollographql.com/docs/). This project uses Apollo for creating the GraphQL server on top of Express. 
@@ -28,8 +28,7 @@ It is recommended that you first become familiar with graphql theory and impleme
 Deployment is automatic via Team City in development, release, and master branches. They live under API & Back-End > GraphQL-API and get deployed to Kubernetes (https://k8s-int.crossroads.net/#!/service/api/crds-graphql-content?namespace=api).
 
 #### Logging
-We are logging for service analytics in new relic under graphql-api ${env}.
-We are also logging requests, responses and errors to logz.io. 
+Logging is handled by the graphql gateway.
 
 #### Environment variables
 .envrc Sample: 
@@ -54,9 +53,6 @@ Because we want to have outgoing calls deduped and cached per incoming request, 
 
 ### Unit Testing
 We are using jest.js (https://jestjs.io/docs/en/getting-started) for unit tests. I have set the pattern to create and export your mockConnector at the top of every spec file with the unit tests to follow. You will need to create a new ApolloServer and an ApolloTestClient in each unit test. See `src/graph/sites/sites.spec.ts` for an example. 
-
-### CLI
-Future work may include the creation of a CLI for quickly adding models and automatically injecting/importing resolvers, schemas and connectors where necessary. This is hopeful, don't count on it. ;)
 
 ## License
 
