@@ -47,6 +47,11 @@ Once you have your new model and folder along with all of it's files, you will n
 
 The resolver and schema for the new model will also need to be made available to the ApolloServer by importing it to `src/resolvers.ts` and `src/schema.ts` respectively.
 
+##Data Sources
+Try to stick to datasources that implement Facebook's DataLoader already. Apollo has a RESTDataSource that we can extend that will automatically dedupe outgoing network (per incoming request) calls for us. There is also a community mongo package that does the same thing. This allows us to have the same call in different field resolvers and only make that call once. This simplifies the resolvers implementation incredibly by having the underlying datasources deduping requests.  
+
+Because we want to have outgoing calls deduped and cached per incoming request, this means we want to create new instances of the datasources for every incoming call. I have been following the pattern that we will do any service initialization (like getting an auth token) in source configuration under the `sources` folder. A concrete example of this is getting an MP client token so we can hit the MP Rest API. We do not want to make a call to get this token for every incoming request, so instead we handle this in an `MP.ts` file under the `sources` folder. We can reuse the obtained client token and keep that process abstracted from the connectors that are instantiated for each incoming request. Notice that in initializing the datasources in the graphql.ts file we call `new ExampleAPI()`. This gets called on every incoming request.
+
 ### Unit Testing
 We are using jest.js (https://jestjs.io/docs/en/getting-started) for unit tests. I have set the pattern to create and export your mockConnector at the top of every spec file with the unit tests to follow. You will need to create a new ApolloServer and an ApolloTestClient in each unit test. See `src/graph/sites/sites.spec.ts` for an example. 
 
