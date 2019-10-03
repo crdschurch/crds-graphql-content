@@ -1,7 +1,4 @@
 import { gql } from "apollo-server-express";
-import userSchema from "./graph/users/users.schema";
-import siteSchema from "./graph/sites/sites.schema";
-import groupsSchema from "./graph/groups/groups.schema";
 import contentSchema from "./graph/content/content.schema";
 
 const linkSchema = gql`
@@ -13,10 +10,6 @@ const linkSchema = gql`
     _: Boolean
   }
 
-  type Subscription {
-    _: Boolean
-  }
-
   directive @cacheControl(maxAge: Int, scope: CacheControlScope) on OBJECT | FIELD_DEFINITION
 
   enum CacheControlScope {
@@ -25,4 +18,4 @@ const linkSchema = gql`
   }
 `;
 
-export default [linkSchema, userSchema, siteSchema, groupsSchema, ...contentSchema];
+export default [linkSchema, ...contentSchema];
