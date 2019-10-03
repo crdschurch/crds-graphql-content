@@ -33,7 +33,6 @@ export class GraphqlServer {
       }),
       context: ({ req }) => {
         if (req.body.query.includes("IntrospectionQuery")) return;
-        //we will pass in the auth from the gateway if needed
       },
       dataSources: (): any => {
         return <IDataSources> {
