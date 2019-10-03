@@ -7,4 +7,4 @@ services:
       dockerfile: ./deployment/docker/Dockerfile
     container_name: graphql-content
     ports:
-      - 8000:8000
+      - 8003:8003
