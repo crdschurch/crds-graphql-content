@@ -49,7 +49,7 @@ export class GraphqlServer {
 
     server.applyMiddleware({ app, path: "/" });
 
-    app.listen({ port: 8001 }, () => {
+    app.listen({ port: 8003 }, () => {
     });
   }
 

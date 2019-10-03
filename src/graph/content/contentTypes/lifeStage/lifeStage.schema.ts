@@ -5,7 +5,7 @@ export default gql`
     lifeStages: [LifeStage!]
   }
 
-  type LifeStage implements Content {
+  type LifeStage implements Content @key(fields: "id title") {
     id: ID!
     title: String
     description: String

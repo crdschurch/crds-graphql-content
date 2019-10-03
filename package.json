@@ -46,6 +46,7 @@
     "moment": "^2.24.0",
     "mongodb": "^3.3.0",
     "newrelic": "^5.10.0",
+    "nodemon": "^1.19.3",
     "querystring": "^0.2.0",
     "reflect-metadata": "^0.1.13",
     "remove-markdown": "^0.3.0",
