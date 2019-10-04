@@ -32,7 +32,7 @@ export class GraphqlServer {
         resolvers
       }),
       context: ({ req }) => {
-        if (req.body.query.includes("IntrospectionQuery")) return;
+        if (!!!req.body.query || req.body.query.includes("IntrospectionQuery")) return;
       },
       dataSources: (): any => {
         return <IDataSources> {
