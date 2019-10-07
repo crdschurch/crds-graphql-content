@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "debug": "ts-node-dev --respawn --inspect=9003 --transpileOnly src/index.ts",
+    "debug": "ts-node-dev --inspect=9003 --transpileOnly src/index.ts",
     "start": "node dist/index.js"
   },
   "repository": {

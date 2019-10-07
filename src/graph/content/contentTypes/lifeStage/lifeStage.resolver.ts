@@ -2,7 +2,7 @@ import { IContext } from "../../../context/context.interface";
 
 const resolverMap: any = {
   Query: {
-    lifeStages: (parent, args, { authData, dataSources }: IContext) => {
+    lifeStages: (parent, args, { authData, dataSources, forceRefresh }: IContext) => {
       return dataSources.contentConnector.getContent({ content_type: 'life_stage' });
     },
   }
