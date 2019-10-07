@@ -5,7 +5,7 @@ export default gql`
     lifeStages: [LifeStage!]
   }
 
-  type LifeStage implements Content @key(fields: "id title") {
+  type LifeStage implements Content @key(fields: "id title") @cacheControl(maxAge: 86400) {
     id: ID!
     title: String
     description: String

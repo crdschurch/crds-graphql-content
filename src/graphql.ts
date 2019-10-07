@@ -48,9 +48,6 @@ export class GraphqlServer {
           }
         })
       ],
-      cacheControl: {
-        defaultMaxAge: 86400
-      },
       cache: new RedisCache(`redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}/${process.env.REDIS_DB}`)
     });
 
