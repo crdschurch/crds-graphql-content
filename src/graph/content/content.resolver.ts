@@ -13,6 +13,7 @@ import promoResolver from "./contentTypes/promo/promo.resolver";
 import seriesResolver from "./contentTypes/series/series.resolver";
 import songResolver from "./contentTypes/song/song.resolver";
 import videoResolver from "./contentTypes/video/video.resolver";
+import locationResolver from "./contentTypes/location/location.resolver";
 
 import camelCase from "camelcase";
 import { merge } from "lodash";
@@ -47,5 +48,6 @@ export default merge(
   promoResolver,
   seriesResolver,
   songResolver,
-  videoResolver
+  videoResolver,
+  locationResolver
 );

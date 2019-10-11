@@ -1,3 +1,4 @@
+import Site from "./contentTypes/location/location";
 export interface IContent {
     title: string
     contentType: string
@@ -13,6 +14,7 @@ export interface IContent {
 
 export interface IContentConnector {
     getContent(filters): Promise<IContent[]>
+    getSite(id: number): Promise<Site>
 }
 
 export interface IContentService {
