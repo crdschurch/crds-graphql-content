@@ -15,7 +15,7 @@ export default class Location extends Content {
     this.title = fields.name;
     this.serviceTimes = fields.service_times;
     this.map_url = fields.map_url;
-    this.mapImageUrl = ContentUtils.getImgixURL(fields.map_image.fields.file.url);
+    this.mapImageUrl = fields.map_image && fields.map_image.fields && ContentUtils.getImgixURL(fields.map_image.fields.file.url);
     this.address = fields.address;
     this.serviceTimes = fields.service_times;
     this.openHours = fields.open_hours;
