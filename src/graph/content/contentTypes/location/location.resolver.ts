@@ -18,6 +18,10 @@ const resolverMap = {
     mapImageUrl: async (parent, args, { authData, dataSources }: IContext) => {
       const location = await dataSources.contentConnector.getSite(parent.id);
       return location.mapImageUrl;
+    },
+    mapUrl: async (parent, args, { authData, dataSources }: IContext) => {
+      const location = await dataSources.contentConnector.getSite(parent.id);
+      return location.mapUrl;
     }
   }
 };

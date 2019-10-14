@@ -7,5 +7,6 @@ export default gql`
     serviceTimes: String
     openHours: String
     mapImageUrl: String
+    mapUrl: String
   }
 `;
