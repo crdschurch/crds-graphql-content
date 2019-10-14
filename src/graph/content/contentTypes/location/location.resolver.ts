@@ -22,7 +22,11 @@ const resolverMap = {
     mapUrl: async (parent, args, { authData, dataSources }: IContext) => {
       const location = await dataSources.contentConnector.getSite(parent.id);
       return location.mapUrl;
-    }
+    },
+    imageUrl: async (parent, args, { authData, dataSources }: IContext) => {
+      const location = await dataSources.contentConnector.getSite(parent.id);
+      return location.imageUrl;
+    },
   }
 };
 

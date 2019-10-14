@@ -8,5 +8,6 @@ export default gql`
     openHours: String
     mapImageUrl: String
     mapUrl: String
+    imageUrl: String
   }
 `;

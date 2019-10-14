@@ -7,6 +7,7 @@ export default class Location extends Content {
   public mapImageUrl: string;
   public address: string;
   public openHours: string;
+  public imageUrl: string;
 
   constructor(entry) {
     super(entry);
