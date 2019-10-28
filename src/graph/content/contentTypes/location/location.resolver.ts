@@ -1,5 +1,6 @@
 import { IContext } from "../../../context/context.interface";
 import Site from "../../contentTypes/location/location";
+import { IContent } from "../../content.interface";
 
 async function getSiteContent(site, dataSources): Promise<Site | null> {
   if(!site.isPhysicalLocation) return null;
@@ -32,6 +33,10 @@ const resolverMap = {
       const location = await getSiteContent(parent, dataSources);
       return location && location.imageUrl;
     },
+    qualifiedUrl: async (parent, args, { authData, dataSources }: IContext) => {
+      const location = await getSiteContent(parent, dataSources);
+      return location && location.getQualifiedUrl();
+    }
   }
 };
 

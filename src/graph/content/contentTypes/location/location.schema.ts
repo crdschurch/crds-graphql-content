@@ -10,5 +10,6 @@ export default gql`
     mapImageUrl: String @requires(fields: "isPhysicalLocation")
     mapUrl: String @requires(fields: "isPhysicalLocation")
     imageUrl: String @requires(fields: "isPhysicalLocation")
+    qualifiedUrl: String
   }
 `;
