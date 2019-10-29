@@ -1,87 +1,62 @@
-import { ApolloServer, makeExecutableSchema } from "apollo-server-express";
+import { ApolloServer } from "apollo-server-express";
 import { Express } from "express";
 import * as http from "http";
 import { inject, injectable } from "inversify";
 import { Types } from "./ioc/types";
 import schema from "./schema";
 import resolvers from "./resolvers";
-import { IAuthConnector } from "./graph/auth/auth.interface";
-import { IUsersConnector } from "./graph/users/users.interface";
-import { ISitesConnector } from "./graph/sites/sites.interface";
-import { RedisCache } from "apollo-server-cache-redis";
 import responseCachePlugin from "apollo-server-plugin-response-cache";
-import { Analytics } from "./config/analytics";
-import { Logger } from "./config/logging";
-import { IContentConnector } from "./graph/content/content.interface";
+import { IContentService } from "./graph/content/content.interface";
+import { IDataSources } from "./graph/context/context.interface";
+import { buildFederatedSchema } from "@apollo/federation";
+import { ContentConnector } from "./graph/content/content.connector";
+import { RedisCache } from "apollo-server-cache-redis";
 
 @injectable()
 export class GraphqlServer {
+  public set express(v: Express) {
+    this.app = v;
+  }
+  private app: Express;
+  private serverInstance: http.Server;
 
-    public set express(v: Express) {
-        this.app = v;
-    }
-    private app: Express;
-    private serverInstance: http.Server;
+  constructor(@inject(Types.ContentService) private contentService: IContentService) {}
 
-    constructor(
-        @inject(Types.AuthConnector) private authConnector: IAuthConnector,
-        @inject(Types.UsersConnector) private usersConnector: IUsersConnector,
-        @inject(Types.SitesConnector) private sitesConnector: ISitesConnector,
-        @inject(Types.ContentConnector) private contentConnector: IContentConnector,
-        @inject(Types.Analytics) private analytics: Analytics,
-        @inject(Types.Logger) private logger: Logger
-    ) { }
+  public async start(): Promise<void> {
+    let app = this.app;
 
-    public async start(): Promise<void> {
+    const server = new ApolloServer({
+      schema: buildFederatedSchema({
+        typeDefs: schema,
+        resolvers
+      }),
+      context: ({ req }) => {
+        if (!!!req.body.query || req.body.query.includes("IntrospectionQuery")) return;
+        const forceRefresh = req.headers.force_refresh === "true";
+        return { forceRefresh: forceRefresh };
+      },
+      dataSources: (): any => {
+        return <IDataSources>{
+          contentConnector: new ContentConnector(this.contentService)
+        };
+      },
+      plugins: [
+        responseCachePlugin({
+          sessionId: requestContext => requestContext.request.http.headers.get("authorization") || null,
+          shouldReadFromCache: requestContext => {
+            return !requestContext.context.forceRefresh;
+          }
+        })
+      ],
+      cache: new RedisCache(`redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}/${process.env.REDIS_DB}`)
+    });
 
-        let app = this.app;
+    server.applyMiddleware({ app, path: "/" });
 
-        const server = new ApolloServer({
-            schema: makeExecutableSchema({
-                typeDefs: schema,
-                resolvers,
-                inheritResolversFromInterfaces: true
-            }),
-            context: ({ req }) => {
-                if (req.body.query.includes('IntrospectionQuery')) return;
-                const token = req.headers.authorization || "";
-                return this.authConnector.authenticate(token).then((user) => {
-                    return user;
-                });
-            },
-            dataSources: (): any => {
-                return {
-                    usersConnector: this.usersConnector,
-                    sitesConnector: this.sitesConnector,
-                    contentConnector: this.contentConnector,
-                    analytics: this.analytics,
-                    logger: this.logger
-                };
-            },
-            formatResponse: response => {
-                this.logger.logResponseBody(response);
-                return response;
-            },
-            formatError: error => {
-                this.logger.logError(error);
-                return error;
-            },
-            plugins: [responseCachePlugin({
-                sessionId: (requestContext) => (requestContext.request.http.headers.get('authorization') || null),
-            })],
-            cacheControl: {
-                defaultMaxAge: 5,
-              },
-            cache: new RedisCache(`redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}/${process.env.REDIS_DB}`),
+    app.listen({ port: 8003 }, () => {});
+  }
 
-        });
-
-        server.applyMiddleware({ app, path: "/" })
-
-        app.listen({ port: 8000 }, () => { console.log('listening on 8000') });
-    }
-
-    public stop() {
-        this.serverInstance.close();
-    }
+  public stop() {
+    this.serverInstance.close();
+  }
 }

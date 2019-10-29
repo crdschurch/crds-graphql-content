@@ -11,7 +11,7 @@ export default class Perpective extends Content {
         var fields = entry.fields;
         this.authors = getAuthors(fields.author);
         this.date = ContentUtils.formatDate(fields.published_at);
-        this.description = ContentUtils.removeMarkdown(fields.body.substring(0, fields.body.indexOf('\n\n') || fields.body.indexOf('\n')));
+        this.description = fields.body.substring(0, fields.body.indexOf('\n\n') || fields.body.indexOf('\n'));
     }
 }
 

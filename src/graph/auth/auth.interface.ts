@@ -1,7 +1,3 @@
-export interface IAuthConnector {
-    authenticate(token: string): Promise<any>
-}
-
 export interface IAuthData {
     userInfo: IUserInfo,
     roles: {[key: number]: string},
