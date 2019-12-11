@@ -26,6 +26,7 @@ export class ContentService implements IContentService {
     return this.client.getEntries(params)
       .then((response) => {
         entries = [...entries, ...response.items];
+        console.log(entries);
         if (response.items.length !== 1000) return entries;
         return this.getNextEntries(filters, entries, skip + 1000);
       }).catch((ex) => { throw ex; })

@@ -10,6 +10,7 @@ import VideoSchema from "./contentTypes/video/video.schema";
 import LifeStageSchema from "./contentTypes/lifeStage/lifeStage.schema";
 import ContentBlockSchema from "./contentTypes/contentBlock/contentBlock.schema";
 import LocationSchema from "./contentTypes/location/location.schema";
+import OnsiteGroupSchema from "./contentTypes/onsiteGroup/onsiteGroup.schema";
 
 const ContentSchema = gql`
   interface Content {
@@ -44,5 +45,6 @@ export default [
   LifeStageSchema,
   ContentBlockSchema,
   ContentSchema,
-  LocationSchema
+  LocationSchema,
+  OnsiteGroupSchema
 ];

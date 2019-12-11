@@ -14,6 +14,7 @@ import Song from './song/song';
 import Video from './video/video';
 import LifeStage from './lifeStage/lifeStage';
 import ContentBlock from './contentBlock/contentBlock';
+import OnsiteGroup from './onsiteGroup/onsiteGroup';
 
 export {
       Album
@@ -32,4 +33,5 @@ export {
     , Video
     , LifeStage
     , ContentBlock
+    , OnsiteGroup
 }

@@ -14,6 +14,7 @@ import seriesResolver from "./contentTypes/series/series.resolver";
 import songResolver from "./contentTypes/song/song.resolver";
 import videoResolver from "./contentTypes/video/video.resolver";
 import locationResolver from "./contentTypes/location/location.resolver";
+import onsiteGroupResolver from "./contentTypes/onsiteGroup/onsiteGroup.resolver";
 
 import camelCase from "camelcase";
 import { merge } from "lodash";
@@ -49,5 +50,6 @@ export default merge(
   seriesResolver,
   songResolver,
   videoResolver,
-  locationResolver
+  locationResolver,
+  onsiteGroupResolver
 );
