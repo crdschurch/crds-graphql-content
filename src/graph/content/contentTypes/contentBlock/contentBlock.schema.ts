@@ -7,6 +7,7 @@ export default gql`
 
   input ContentBlockInput {
     category: String
+    slug: [String!]
   }
 
   type ContentBlock implements Content {
