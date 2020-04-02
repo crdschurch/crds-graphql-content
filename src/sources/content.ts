@@ -1,6 +1,6 @@
-import { createClient, ContentfulClientApi } from 'contentful';
-import { injectable } from 'inversify';
-import { IContentService } from '../graph/content/content.interface';
+import { createClient, ContentfulClientApi } from "contentful";
+import { injectable } from "inversify";
+import { IContentService } from "../graph/content/content.interface";
 
 @injectable()
 export class ContentService implements IContentService {
@@ -23,23 +23,30 @@ export class ContentService implements IContentService {
 
     Object.assign(params, filters);
 
-    return this.client.getEntries(params)
-      .then((response) => {
+    return this.client
+      .getEntries(params)
+      .then(response => {
         entries = [...entries, ...response.items];
         if (response.items.length !== 1000) return entries;
         return this.getNextEntries(filters, entries, skip + 1000);
-      }).catch((ex) => { throw ex; })
+      })
+      .catch(ex => {
+        throw ex;
+      });
   }
 
   public getContent(filters: object): Promise<any> {
     const newFilters = {};
     Object.keys(filters).forEach(key => {
       var newKey = key;
-      if (key != 'content_type') newKey = 'fields.' + newKey
-      newKey = newKey.replace('.id', '.sys.id');
-      newFilters[newKey] = filters[key]
+      if (key != "content_type") newKey = "fields." + newKey;
+      newKey = newKey.replace(".id", ".sys.id");
+      if (Array.isArray(filters[key])) {
+        newKey = `${newKey}[in]`;
+        filters[key] = filters[key].join(",");
+      }
+      newFilters[newKey] = filters[key];
     });
     return this.getNextEntries(newFilters, [], 0);
   }
-
 }
