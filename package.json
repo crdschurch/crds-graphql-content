@@ -45,7 +45,7 @@
     "ministry-platform": "^1.0.0",
     "moment": "^2.24.0",
     "mongodb": "^3.5.5",
-    "newrelic": "^5.13.1",
+    "newrelic": "^6.6.0",
     "nodemon": "^1.19.4",
     "querystring": "^0.2.0",
     "reflect-metadata": "^0.1.13",
