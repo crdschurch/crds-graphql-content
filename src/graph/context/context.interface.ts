@@ -1,5 +1,6 @@
 import { IContentConnector } from "../content/content.interface";
 import { IAuthData } from "../auth/auth.interface";
+import { ISocialMediaMongo } from "../social-media/social-media.interface";
 
 export interface IContext {
   authData: IAuthData;
@@ -9,4 +10,5 @@ export interface IContext {
 
 export interface IDataSources {
   contentConnector: IContentConnector;
+  socialMediaMongo: ISocialMediaMongo;
 }

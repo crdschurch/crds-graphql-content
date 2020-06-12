@@ -11,6 +11,8 @@ import { IDataSources } from "./graph/context/context.interface";
 import { buildFederatedSchema } from "@apollo/federation";
 import { ContentConnector } from "./graph/content/content.connector";
 import { RedisCache } from "apollo-server-cache-redis";
+import { SocialMediaMongoAuth } from "./graph/auth/auth.socialMedia.mongo";
+import { SocialMediaMongo } from "./graph/social-media/social-media.mogno";
 
 @injectable()
 export class GraphqlServer {
@@ -25,6 +27,10 @@ export class GraphqlServer {
   public async start(): Promise<void> {
     let app = this.app;
 
+    const socialMediaPostsCollection = await SocialMediaMongoAuth.getCollection(
+      "SocialMediaPosts"
+    );
+
     const server = new ApolloServer({
       schema: buildFederatedSchema({
         typeDefs: schema,
@@ -37,7 +43,8 @@ export class GraphqlServer {
       },
       dataSources: (): any => {
         return <IDataSources>{
-          contentConnector: new ContentConnector(this.contentService)
+          contentConnector: new ContentConnector(this.contentService),
+          socialMediaMongo: new SocialMediaMongo({ socialMediaPostsCollection }),
         };
       },
       plugins: [
