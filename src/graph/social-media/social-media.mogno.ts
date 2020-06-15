@@ -27,6 +27,7 @@ export class SocialMediaMongo extends MongoDataSource
         return document
           .map((a) => {
             a.post.timestamp = new Date(a.post.timestamp).getTime() / 1000;
+            a.post.thumbnailUrl = a.post.permalink + "media/?size=m";
             return a.post;
           })
           .sort((a, b) => {
