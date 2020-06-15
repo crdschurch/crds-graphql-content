@@ -8,14 +8,15 @@ export class SocialMediaMongo extends MongoDataSource
   }
 
   public getSocialMediaPosts(
-    types?: string[],
+    sources?: string[],
     usernames?: string[],
     limit?: number,
     offset?: number
   ): Promise<any> {
+    console.log(sources);
     return (<any>this).socialMediaPostsCollection
       .find({
-        ...(types ? { "post.source": { $in: types } } : null),
+        ...(sources ? { "post.source": { $in: sources } } : null),
         ...(usernames ? { "post.username": { $in: usernames } } : null),
       })
       .limit(limit || 0)
