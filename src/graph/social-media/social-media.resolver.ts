@@ -6,7 +6,7 @@ import { IContext } from "../context/context.interface";
 const SocialMediaResolver: any = {
   Query: {
     socialMediaPosts: (parent, args, { authData, dataSources }: IContext) => {
-      return dataSources.socialMediaMongo.getSocialMediaPosts(args.types, args.usernames, args.limit, args.offset);
+      return dataSources.socialMediaMongo.getSocialMediaPosts(args.sources, args.usernames, args.limit, args.offset);
     },
   }
 };

@@ -1,6 +1,6 @@
 export interface ISocialMediaMongo {
   getSocialMediaPosts(
-    types?: string[],
+    sources?: string[],
     usernames?: string[],
     limit?: number,
     offset?: number
