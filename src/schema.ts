@@ -1,5 +1,6 @@
 import { gql } from "apollo-server-express";
 import contentSchema from "./graph/content/content.schema";
+import socialMediaSchema from "./graph/social-media/social-media.schema";
 
 const linkSchema = gql`
   type Query {
@@ -10,7 +11,10 @@ const linkSchema = gql`
     _: Boolean
   }
 
-  directive @cacheControl(maxAge: Int, scope: CacheControlScope) on OBJECT | FIELD_DEFINITION
+  directive @cacheControl(
+    maxAge: Int
+    scope: CacheControlScope
+  ) on OBJECT | FIELD_DEFINITION
 
   enum CacheControlScope {
     PUBLIC
@@ -18,4 +22,4 @@ const linkSchema = gql`
   }
 `;
 
-export default [linkSchema, ...contentSchema];
+export default [linkSchema, ...contentSchema, socialMediaSchema];
