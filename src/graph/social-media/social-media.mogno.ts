@@ -13,7 +13,6 @@ export class SocialMediaMongo extends MongoDataSource
     limit?: number,
     offset?: number
   ): Promise<any> {
-    console.log(sources);
     return (<any>this).socialMediaPostsCollection
       .find({
         ...(sources ? { "post.source": { $in: sources } } : null),
@@ -21,6 +20,7 @@ export class SocialMediaMongo extends MongoDataSource
       })
       .limit(limit || 0)
       .skip(offset || 0)
+      .sort({"post.timestamp": -1})
       .toArray()
       .then((document) => {
         if (!document) return null;
