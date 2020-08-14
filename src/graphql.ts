@@ -32,6 +32,10 @@ export class GraphqlServer {
     );
 
     const server = new ApolloServer({
+      engine: {
+        sendHeaders: { all: true},
+        sendVariableValues: { all : true }
+      },
       schema: buildFederatedSchema({
         typeDefs: schema,
         resolvers
