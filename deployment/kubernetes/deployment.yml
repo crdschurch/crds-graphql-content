@@ -40,11 +40,104 @@ spec:
             successThreshold: 1
             periodSeconds: 3
           env:
-            - name: VAULT_ROLE_ID
-              value: $VAULT_ROLE_ID
-            - name: VAULT_SECRET_ID
-              value: $VAULT_SECRET_ID
+            - name: ENGINE_API_KEY
+              value: $ENGINE_API_KEY
+            - name: ENGINE_SCHEMA_TAG
+              value: $ENGINE_SCHEMA_TAG
             - name: CRDS_ENV
               value: $CRDS_ENV
             - name: NEW_RELIC_LICENSE_KEY            
               value: $NR_INSTALL_KEY
+            - name: AUTH_SERVICE_BASE_URL
+              value: $AUTH_SERVICE_BASE_URL
+            - name: CRDS_APP_CLIENT_ENDPOINT
+              value: $CRDS_APP_CLIENT_ENDPOINT
+            - name: CRDS_GATEWAY_BASE_URL
+              value: $CRDS_GATEWAY_BASE_URL
+            - name: CRDS_MEDIA_ENDPOINT
+              value: $CRDS_MEDIA_ENDPOINT
+            - name: CRDS_MP_COMMON_CLIENT_ID
+              value: $CRDS_MP_COMMON_CLIENT_ID
+            - name: CRDS_MP_COMMON_CLIENT_SECRET
+              value: $CRDS_MP_COMMON_CLIENT_SECRET
+            - name: ENV_SUBDOMAIN
+              value: $ENV_SUBDOMAIN
+            - name: LOGZIO_API_TOKEN
+              value: $LOGZIO_API_TOKEN
+            - name: MP_OAUTH_BASE_URL
+              value: $MP_OAUTH_BASE_URL
+            - name: MP_REST_API_ENDPOINT
+              value: $MP_REST_API_ENDPOINT
+            - name: NEW_RELIC_LICENSE_KEY
+              value: $NEW_RELIC_LICENSE_KEY
+            - name: REDIS_HOST
+              value: $REDIS_HOST
+            - name: REDIS_PASSWORD
+              value: $REDIS_PASSWORD
+            - name: BASE_HOST
+              value: $BASE_HOST
+            - name: CONTENTFUL_ACCESS_TOKEN
+              value: $CONTENTFUL_ACCESS_TOKEN
+            - name: CONTENTFUL_ENV
+              value: $CONTENTFUL_ENV
+            - name: CONTENTFUL_MANAGEMENT_TOKEN
+              value: $CONTENTFUL_MANAGEMENT_TOKEN
+            - name: CONTENTFUL_SPACE_ID
+              value: $CONTENTFUL_SPACE_ID
+            - name: COSMOS_CONNECTION_STRING
+              value: $COSMOS_CONNECTION_STRING
+            - name: COSMOS_DB_ENDPOINT
+              value: $COSMOS_DB_ENDPOINT
+            - name: COSMOS_DB_KEY
+              value: $COSMOS_DB_KEY
+            - name: CRDS_ENV
+              value: $CRDS_ENV
+            - name: CRDS_IDENTITY_SERVICE_ENDPOINT
+              value: $CRDS_IDENTITY_SERVICE_ENDPOINT
+            - name: GCP_STORAGE_BUCKET
+              value: $GCP_STORAGE_BUCKET
+            - name: GCP_STORAGE_ENDPOINT
+              value: $GCP_STORAGE_ENDPOINT
+            - name: GOOGLE_DISTANCE_API_KEY
+              value: $GOOGLE_DISTANCE_API_KEY
+            - name: MARITAL_CONTACT_ID
+              value: $MARITAL_CONTACT_ID
+            - name: MARITAL_TEMPLATE_ID
+              value: $MARITAL_TEMPLATE_ID
+            - name: METAROUTER_SOURCE_ID
+              value: $METAROUTER_SOURCE_ID
+            - name: MP_CLIENT_ID
+              value: $MP_CLIENT_ID
+            - name: MP_CLIENT_SECRET
+              value: $MP_CLIENT_SECRET
+            - name: MP_PASSWORD
+              value: $MP_PASSWORD
+            - name: MP_USERNAME
+              value: $MP_USERNAME
+            - name: REDIS_DB
+              value: $REDIS_DB
+            - name: SEND_GRID_API_KEY
+              value: $SEND_GRID_API_KEY
+            - name: DECLINE_SPOUSE_TEMPLATE_ID
+              value: $DECLINE_SPOUSE_TEMPLATE_ID
+            - name: INTERCOM_HASH_KEY
+              value: $INTERCOM_HASH_KEY
+            - name: INVITE_SPOUSE_TEMPLATE_ID
+              value: $INVITE_SPOUSE_TEMPLATE_ID
+            - name: MP_CLIENT_ID
+              value: $MP_CLIENT_ID
+            - name: MP_CLIENT_SECRET
+              value: $MP_CLIENT_SECRET
+            - name: MYPROFILE_CONTACT_ID
+              value: $MYPROFILE_CONTACT_ID
+            - name: NOREPLY_CONTACT_ID
+              value: $NOREPLY_CONTACT_ID
+            - name: SENDGRID_API_KEY
+              value: $SENDGRID_API_KEY
+            - name: SPOUSE_INVITE_EXP
+              value: $SPOUSE_INVITE_EXP
+            - name: SPOUSE_INVITE_LANDING_PAGE
+              value: $SPOUSE_INVITE_LANDING_PAGE
+            - name: SPOUSE_INVITE_LANDING_PAGE_DECLINE
+              value: $SPOUSE_INVITE_LANDING_PAGE_DECLINE
+
