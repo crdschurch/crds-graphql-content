@@ -4,7 +4,7 @@ import Author, { getAuthors } from "../author/author";
 
 export default class Perpective extends Content {
     public authors: Author[];
-    public date: string;
+
     constructor(entry) {
         super(entry);
 

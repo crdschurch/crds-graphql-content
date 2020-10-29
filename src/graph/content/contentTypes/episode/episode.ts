@@ -4,7 +4,6 @@ import Podcast from "../podcast/podcast";
 
 export default class Episode extends Content {
     public duration: string;
-    public date: string;
     public podcast: Podcast;
     public transcription: string;
 
