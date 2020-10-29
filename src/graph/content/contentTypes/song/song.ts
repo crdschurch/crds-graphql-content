@@ -24,7 +24,7 @@ export default class Song extends Content {
       fields.bg_image && fields.bg_image.fields
         ? ContentUtils.getImgixURL(fields.bg_image.fields.file.url)
         : null;
-    // this.imageUrl = image || this.album.imageUrl
+    this.imageUrl = image || this.album.imageUrl;
   }
 
   public getQualifiedUrl(): Promise<string> {
