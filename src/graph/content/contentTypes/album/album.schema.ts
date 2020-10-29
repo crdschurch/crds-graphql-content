@@ -22,5 +22,6 @@ export default gql`
     description: String
     viewCount: Int
     songs: [Song!]
+    publisher: String
   }
 `;
