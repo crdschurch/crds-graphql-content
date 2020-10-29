@@ -13,6 +13,9 @@ import { ContentConnector } from "./graph/content/content.connector";
 import { RedisCache } from "apollo-server-cache-redis";
 import { SocialMediaMongoAuth } from "./graph/auth/auth.socialMedia.mongo";
 import { SocialMediaMongo } from "./graph/social-media/social-media.mogno";
+import { AnalyticsAPI } from "./sources/analytics/analytics.api";
+import { MusicAPI } from "./sources/music/music.api";
+import { BitmovinAnalyticsAPI } from "./sources/analytics/bitmovinAnalytics.api";
 
 @injectable()
 export class GraphqlServer {
@@ -22,7 +25,9 @@ export class GraphqlServer {
   private app: Express;
   private serverInstance: http.Server;
 
-  constructor(@inject(Types.ContentService) private contentService: IContentService) {}
+  constructor(
+    @inject(Types.ContentService) private contentService: IContentService
+  ) {}
 
   public async start(): Promise<void> {
     let app = this.app;
@@ -34,28 +39,37 @@ export class GraphqlServer {
     const server = new ApolloServer({
       schema: buildFederatedSchema({
         typeDefs: schema,
-        resolvers
+        resolvers,
       }),
       context: ({ req }) => {
-        if (!!!req.body.query || req.body.query.includes("IntrospectionQuery")) return;
+        if (!!!req.body.query || req.body.query.includes("IntrospectionQuery"))
+          return;
         const forceRefresh = req.headers.force_refresh === "true";
         return { forceRefresh: forceRefresh };
       },
       dataSources: (): any => {
         return <IDataSources>{
           contentConnector: new ContentConnector(this.contentService),
-          socialMediaMongo: new SocialMediaMongo({ socialMediaPostsCollection }),
+          socialMediaMongo: new SocialMediaMongo({
+            socialMediaPostsCollection,
+          }),
+          analyticsAPI: new AnalyticsAPI(),
+          musicAPI: new MusicAPI(),
+          bitmovinAnalyticsAPI: new BitmovinAnalyticsAPI()
         };
       },
       plugins: [
         responseCachePlugin({
-          sessionId: requestContext => requestContext.request.http.headers.get("authorization") || null,
-          shouldReadFromCache: requestContext => {
+          sessionId: (requestContext) =>
+            requestContext.request.http.headers.get("authorization") || null,
+          shouldReadFromCache: (requestContext) => {
             return !requestContext.context.forceRefresh;
-          }
-        })
+          },
+        }),
       ],
-      cache: new RedisCache(`redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}/${process.env.REDIS_DB}`)
+      cache: new RedisCache(
+        `redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}/${process.env.REDIS_DB}`
+      ),
     });
 
     server.applyMiddleware({ app, path: "/" });

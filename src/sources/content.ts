@@ -40,7 +40,7 @@ export class ContentService implements IContentService {
     Object.keys(filters).forEach(key => {
       var newKey = key;
       if (key != "content_type") newKey = "fields." + newKey;
-      newKey = newKey.replace(".id", ".sys.id");
+      newKey = newKey.replace("fields.id", "sys.id");
       if (Array.isArray(filters[key])) {
         newKey = `${newKey}[in]`;
         filters[key] = filters[key].join(",");

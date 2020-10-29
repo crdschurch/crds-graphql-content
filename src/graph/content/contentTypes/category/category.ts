@@ -1,14 +1,19 @@
 import Content from "../../content.base";
+import { ContentUtils } from "../../content_utils";
 
 export default class Category extends Content {
-    constructor(entry) {
-        super(entry);
-    }
+  constructor(entry) {
+    super(entry);
 
-    public getQualifiedUrl(): Promise<string> {
-        return new Promise((resolve, reject) => {
-            resolve(`${process.env.CRDS_MEDIA_ENDPOINT}/topics/${this.slug}`);
-        });
-    }
+    var fields = entry.fields;
+    this.description = ContentUtils.removeMarkdown(
+      fields.subtitle + " " + fields.body
+    );
+  }
+
+  public getQualifiedUrl(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      resolve(`${process.env.CRDS_MEDIA_ENDPOINT}/topics/${this.slug}`);
+    });
+  }
 }
-

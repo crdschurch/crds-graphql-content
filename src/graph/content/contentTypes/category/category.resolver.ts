@@ -3,30 +3,30 @@ import { IContent } from "../../content.interface";
 
 const resolverMap: any = {
   Query: {
-    podcasts: (parent, args, { authData, dataSources }: IContext) => {
+    categories: (parent, args, { authData, dataSources }: IContext) => {
       return dataSources.contentConnector.getContent({
-        content_type: "podcast",
+        content_type: "category",
         ...args,
       });
     },
   },
-  Podcast: {
+  category: {
     qualifiedUrl: (
-      podcast: IContent,
+      category: IContent,
       args,
       { authData, dataSources }: IContext
     ) => {
-      return podcast.getQualifiedUrl();
+      return category.getQualifiedUrl();
     },
-    episodes: (
-      podcast: IContent,
+    viewCount: async (
+      category: IContent,
       args,
       { authData, dataSources }: IContext
     ) => {
-      return dataSources.contentConnector.getContent({
-        content_type: "episode",
-        "podcast.sys.id": podcast.id,
-      });
+      return dataSources.analyticsAPI.getViewCount(
+        await category.getQualifiedUrl(),
+        process.env.GOOGLE_ANALYTICS_VIEW_ID
+      );
     },
   },
 };

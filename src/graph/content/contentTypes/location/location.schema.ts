@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
-  extend type Site @key(fields: "id")  {
+  extend type Site @key(fields: "id") {
     id: ID! @external
     isPhysicalLocation: Boolean! @external
     address: String @requires(fields: "isPhysicalLocation")

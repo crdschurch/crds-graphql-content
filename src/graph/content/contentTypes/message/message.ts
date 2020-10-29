@@ -7,37 +7,38 @@ import { ContentConnector } from "../../content.connector";
 import { IContent } from "../../content.interface";
 
 export default class Message extends Content {
-    public duration: string;
-    public date: string;
-    protected series: Series;
+  public duration: string;
+  public series: Series;
 
-    constructor(entry) {
-        super(entry);
+  constructor(entry) {
+    super(entry);
 
-        var fields = entry.fields;
-        this.duration = ContentUtils.formatDuration(fields.duration);
-        this.date = ContentUtils.formatDate(fields.published_at);
-    }
+    var fields = entry.fields;
+    this.duration = ContentUtils.formatDuration(fields.duration);
+  }
 
-    public getQualifiedUrl(): Promise<string> {
-        //check if we have already gotten series incase we had to for another field before. 
-        if (this.series)
-            return new Promise((resolve, reject) => {
-                resolve(this.buildUrl());
-            });
+  public getQualifiedUrl(): Promise<string> {
+    //check if we have already gotten series incase we had to for another field before.
+    if (this.series)
+      return new Promise((resolve, reject) => {
+        resolve(this.buildUrl());
+      });
 
-        return container.get<ContentConnector>(Types.ContentConnector)
-            .getContent({
-                'content_type': 'series',
-                'videos.id': this.id
-            })
-            .then((series: IContent[]) => {
-                this.series = <Series>series[0];
-                return this.buildUrl();
-            });
-    }
+    return container
+      .get<ContentConnector>(Types.ContentConnector)
+      .getContent({
+        content_type: "series",
+        "videos.sys.id": this.id,
+      })
+      .then((series: IContent[]) => {
+        this.series = <Series>series[0];
+        return this.buildUrl();
+      });
+  }
 
-    private buildUrl(): string | PromiseLike<string> {
-        return `${process.env.CRDS_MEDIA_ENDPOINT}/series${this.series ? '/' + this.series.slug : ''}/${this.slug}`;
-    }
+  private buildUrl(): string | PromiseLike<string> {
+    return `${process.env.CRDS_MEDIA_ENDPOINT}/series${
+      this.series ? "/" + this.series.slug : ""
+    }/${this.slug}`;
+  }
 }

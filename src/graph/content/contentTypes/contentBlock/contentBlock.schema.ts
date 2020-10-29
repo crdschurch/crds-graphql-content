@@ -14,6 +14,10 @@ export default gql`
     id: ID!
     title: String
     contentType: String!
+    distributionChannels: [String!]
+    likes: Int
+    tags: [String!]
+    date: Float
     slug: String!
     content: String
     type: String!

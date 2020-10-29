@@ -6,7 +6,8 @@ export interface IContent {
     tags: string[]
     description: string
     slug: string
-    interaction_count: number
+    likes: number
+    distributionChannels: string[]
     id: string
     imageUrl: string
     getQualifiedUrl(): Promise<string>

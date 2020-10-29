@@ -1,11 +1,18 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
+  extend type Query {
+    authors(id: [ID!], slug: [String!]): [Author]
+  }
 
-type Author implements Media {
+  type Author implements Media {
     id: ID!
     title: String
     contentType: String!
+    distributionChannels: [String!]
+    likes: Int
+    tags: [String!]
+    date: Float
     slug: String
     duration: String
     authors: [Author!]
@@ -15,4 +22,4 @@ type Author implements Media {
     description: String
     fullName: String
   }
-  `;
+`;

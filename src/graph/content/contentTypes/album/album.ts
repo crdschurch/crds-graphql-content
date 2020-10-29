@@ -1,12 +1,14 @@
 import { ContentUtils } from "../../content_utils";
 import Content from "../../content.base";
 import Author, { getAuthors } from "../author/author";
+import { Song } from "..";
 
 export default class Album extends Content {
   public authors: Author[];
   public duration: string;
-  public date: string;
   public referenceContent: any;
+  public songs: Song[];
+  public spotifyUrl: string;
 
   constructor(entry) {
     super(entry);
@@ -14,7 +16,9 @@ export default class Album extends Content {
     var fields = entry.fields;
     this.authors = getAuthors(fields.author);
     this.duration = ContentUtils.formatDuration(fields.duration);
-    this.date = ContentUtils.formatDate(fields.published_at);
+    this.songs =
+      (fields.songs && fields.songs.map((song) => new Song(song))) || [];
+    this.spotifyUrl = fields.spotify_url;
   }
 
   public getQualifiedUrl(): Promise<string> {
@@ -23,4 +27,3 @@ export default class Album extends Content {
     });
   }
 }
-

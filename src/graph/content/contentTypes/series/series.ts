@@ -2,23 +2,28 @@ import Content from "../../content.base";
 import { ContentUtils } from "../../content_utils";
 
 export default class Series extends Content {
-    public start_date: string;
-    public end_date: string;
-    public messages: string[];
+  public startDate: number;
+  public endDate: number;
+  public messages: string[];
 
-    constructor(entry) {
-        super(entry);
+  constructor(entry) {
+    super(entry);
 
-        var fields = entry.fields;
-        this.start_date = ContentUtils.formatDate(fields.starts_at);
-        this.end_date = ContentUtils.formatDate(fields.ends_at);
-        this.messages = fields.videos ? fields.videos.map(video => video.fields ? video.fields.title : null) : null;
-        this.interaction_count = fields.interaction_count;
-    }
+    var fields = entry.fields;
+    this.startDate = new Date(fields.starts_at).getTime() / 1000;
+    this.endDate = new Date(fields.ends_at).getTime() / 1000;
+    this.messages =
+      fields.videos &&
+      fields.videos
+        .map((video) => video.fields && video.fields.title)
+        .filter((m) => m);
+  }
 
-    public getQualifiedUrl(): Promise<string> {
-        return new Promise((resolve, reject) => {
-            resolve(`${process.env.CRDS_MEDIA_ENDPOINT}/${this.contentType}/${this.slug}`);
-        });
-    }
+  public getQualifiedUrl(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      resolve(
+        `${process.env.CRDS_MEDIA_ENDPOINT}/${this.contentType}/${this.slug}`
+      );
+    });
+  }
 }
