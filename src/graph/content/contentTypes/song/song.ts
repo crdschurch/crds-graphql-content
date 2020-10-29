@@ -7,6 +7,7 @@ export default class Song extends Content {
   public album: Album;
   public spotifyUrl: string;
   public lyrics: string;
+  public artist: string;
 
   constructor(entry) {
     super(entry);
@@ -14,9 +15,10 @@ export default class Song extends Content {
     var fields = entry.fields;
     if (!fields) return;
     this.duration = ContentUtils.formatDuration(fields.duration);
-    this.description = fields.lyrics;
+    this.description = fields.description;
     this.spotifyUrl = fields.spotify_url;
     this.lyrics = ContentUtils.removeMarkdown(fields.lyrics);
+    this.artist = fields.artist;
 
     const image =
       fields.bg_image && fields.bg_image.fields

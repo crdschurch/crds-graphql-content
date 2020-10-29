@@ -23,5 +23,6 @@ export default gql`
     viewCount: Int
     album: Album
     lyrics: String
+    artist: String
   }
 `;
