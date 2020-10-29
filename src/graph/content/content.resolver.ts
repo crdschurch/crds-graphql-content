@@ -3,6 +3,7 @@ import { IContent } from "./content.interface";
 import albumResolver from "./contentTypes/album/album.resolver";
 import articleResolver from "./contentTypes/article/article.resolver";
 import authorResolver from "./contentTypes/author/author.resolver";
+import categoryResolver from "./contentTypes/category/category.resolver";
 import contentBlockResolver from "./contentTypes/contentBlock/contentBlock.resolver";
 import episodeResolver from "./contentTypes/episode/episode.resolver";
 import lifeStageResolver from "./contentTypes/lifeStage/lifeStage.resolver";
@@ -23,15 +24,19 @@ const resolverMap: any = {
     __resolveType(content: IContent, context, info) {
       return camelCase(content.contentType, { pascalCase: true });
     },
-    qualifiedUrl: (parent: IContent, args, { authData, dataSources }: IContext) => {
+    qualifiedUrl: (
+      parent: IContent,
+      args,
+      { authData, dataSources }: IContext
+    ) => {
       return parent.getQualifiedUrl();
-    }
+    },
   },
   Content: {
     __resolveType(content: IContent, context, info) {
       return camelCase(content.contentType, { pascalCase: true });
-    }
-  }
+    },
+  },
 };
 
 export default merge(
@@ -39,6 +44,7 @@ export default merge(
   albumResolver,
   articleResolver,
   authorResolver,
+  categoryResolver,
   contentBlockResolver,
   episodeResolver,
   lifeStageResolver,

@@ -2,25 +2,19 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    messages(id: [ID!], slug: [String!]): [Message]
+    categories(id: [ID!], slug: [String!]): [Category]
   }
 
-  type Message implements Media {
+  type Category implements Content {
     id: ID!
     title: String
     contentType: String!
     distributionChannels: [String!]
+    description: String
     likes: Int
     tags: [String!]
     date: Float
-    slug: String
-    duration: String
-    authors: [Author!]
-    category: String
     imageUrl: String
     qualifiedUrl: String
-    description: String
-    series: Series
-    viewCount: Int
   }
 `;

@@ -13,7 +13,7 @@ export default class Episode extends Content {
 
         var fields = entry.fields;
         this.duration = ContentUtils.formatDuration(fields.duration);
-        this.date = ContentUtils.formatDate(fields.published_at);
+
         this.transcription = fields.transcription;
         this.podcast = new Podcast(fields.podcast);
         this.imageUrl = this.imageUrl || this.podcast.imageUrl;

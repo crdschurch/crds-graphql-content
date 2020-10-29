@@ -5,7 +5,6 @@ import Author, { getAuthors } from "../author/author";
 export default class Article extends Content {
   public authors: Author[];
   public duration: string;
-  public date: string;
   public likes: number;
 
   constructor(entry) {
@@ -15,7 +14,6 @@ export default class Article extends Content {
     this.authors = getAuthors(fields.author);
     this.duration = ContentUtils.formatDuration(fields.duration);
     this.description = fields.body.substring(0, fields.body.indexOf('\n\n') || fields.body.indexOf('\n'));
-    this.date = ContentUtils.formatDate(fields.published_at);
     this.likes = fields.likes;
   }
 }
