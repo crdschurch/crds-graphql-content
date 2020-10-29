@@ -9,6 +9,7 @@ export default class Album extends Content {
   public referenceContent: any;
   public songs: Song[];
   public spotifyUrl: string;
+  public publisher: string;
 
   constructor(entry) {
     super(entry);
@@ -19,6 +20,7 @@ export default class Album extends Content {
     this.songs =
       (fields.songs && fields.songs.map((song) => new Song(song))) || [];
     this.spotifyUrl = fields.spotify_url;
+    this.publisher = fields.publisher;
   }
 
   public getQualifiedUrl(): Promise<string> {
