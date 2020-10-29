@@ -11,14 +11,13 @@ export class BitmovinAnalyticsAPI extends RESTDataSource {
       apiKey: process.env.BITMOVIN_API_KEY,
     });
     const queryBuilder = bitmovin.analytics.queries.builder;
-    const fromDate = new Date();
-    fromDate.setDate(1);
+    const fromDate = new Date('1/1/2010');
     const toDate = new Date();
-    toDate.setDate(14);
     var result = await queryBuilder
       .count("IMPRESSION_ID")
       .between(fromDate, toDate)
+      .filter('VIDEO_TITLE', 'EQ', title)
       .query();
-    return result;
+    return result.rows.find(() => true).find(() => true);
   }
 }
