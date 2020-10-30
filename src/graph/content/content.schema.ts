@@ -40,7 +40,6 @@ const ContentSchema = gql`
     category: String
     imageUrl: String
     qualifiedUrl: String
-    description: String
   }
 `;
 

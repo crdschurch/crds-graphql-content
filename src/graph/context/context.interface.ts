@@ -4,6 +4,7 @@ import { ISocialMediaMongo } from "../social-media/social-media.interface";
 import { IAnalyticsAPI } from "../../sources/analytics/analytics.interface";
 import { IMusicAPI } from "../../sources/music/music.interface";
 import { BitmovinAnalyticsAPI } from "../../sources/analytics/bitmovinAnalytics.api";
+import { PodcastAPI } from "../../sources/analytics/podcast.api";
 
 export interface IContext {
   authData: IAuthData;
@@ -17,4 +18,5 @@ export interface IDataSources {
   analyticsAPI: IAnalyticsAPI;
   musicAPI: IMusicAPI;
   bitmovinAnalyticsAPI: BitmovinAnalyticsAPI;
+  podcastAPI: PodcastAPI;
 }

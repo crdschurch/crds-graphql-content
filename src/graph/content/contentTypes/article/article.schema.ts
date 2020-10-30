@@ -19,7 +19,8 @@ export default gql`
     category: String
     imageUrl: String
     qualifiedUrl: String
-    description: String
+    body: String
     viewCount: Int
+    leadText: String
   }
 `;

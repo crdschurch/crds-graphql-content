@@ -20,5 +20,6 @@ export default gql`
     imageUrl: String
     qualifiedUrl: String
     description: String
+    viewCount: Int
   }
 `;

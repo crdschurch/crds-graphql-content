@@ -19,7 +19,7 @@ export default gql`
     category: String
     imageUrl: String
     qualifiedUrl: String
-    description: String
+    summary: String
     fullName: String
   }
 `;

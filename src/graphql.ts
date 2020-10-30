@@ -16,6 +16,7 @@ import { SocialMediaMongo } from "./graph/social-media/social-media.mogno";
 import { AnalyticsAPI } from "./sources/analytics/analytics.api";
 import { MusicAPI } from "./sources/music/music.api";
 import { BitmovinAnalyticsAPI } from "./sources/analytics/bitmovinAnalytics.api";
+import { PodcastAPI } from "./sources/analytics/podcast.api";
 
 @injectable()
 export class GraphqlServer {
@@ -55,7 +56,8 @@ export class GraphqlServer {
           }),
           analyticsAPI: new AnalyticsAPI(),
           musicAPI: new MusicAPI(),
-          bitmovinAnalyticsAPI: new BitmovinAnalyticsAPI()
+          bitmovinAnalyticsAPI: new BitmovinAnalyticsAPI(),
+          podcastAPI: new PodcastAPI(),
         };
       },
       plugins: [

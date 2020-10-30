@@ -19,16 +19,16 @@ export class AnalyticsAPI extends RESTDataSource implements IAnalyticsAPI {
   }
 
   public async getViewCount(url: string, viewId: string): Promise<number> {
-      await this.willSendRequest();
-      var response = await google.analytics("v3").data.ga.get({
-        auth: this.jwt,
-        ids: "ga:" + viewId, 
-        "start-date": "2005-01-01",
-        "end-date": "today",
-        metrics: "ga:pageviews",
-        filters: `ga:pagePath=~${url}`,
-      });
-      
-      return response.data.rows[0][0];
+    await this.willSendRequest();
+    var response = await google.analytics("v3").data.ga.get({
+      auth: this.jwt,
+      ids: "ga:" + viewId,
+      "start-date": "2005-01-01",
+      "end-date": "today",
+      metrics: "ga:pageviews",
+      filters: `ga:pagePath=~${url}`,
+    });
+
+    return response.data.rows && response.data.rows[0][0];
   }
 }
