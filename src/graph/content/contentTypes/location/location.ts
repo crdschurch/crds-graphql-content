@@ -20,6 +20,8 @@ export default class Location extends Content {
     this.address = fields.address;
     this.serviceTimes = fields.service_times;
     this.openHours = fields.open_hours;
+    this.description = fields.description; 
+    
   }
 
   public getQualifiedUrl(): Promise<string> {
