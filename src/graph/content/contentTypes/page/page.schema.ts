@@ -19,7 +19,7 @@ export default gql`
     slug: String
     imageUrl: String
     qualifiedUrl: String
-    description: String
+    body: String
     viewCount: Int
   }
 `;

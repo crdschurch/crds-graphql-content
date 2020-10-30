@@ -20,7 +20,6 @@ export default gql`
     imageUrl: String
     qualifiedUrl: String
     description: String
-    transcription: String
     viewCount: Int
   }
 `;

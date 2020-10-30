@@ -1,3 +1,4 @@
+import { Episode } from "..";
 import { IContext } from "../../../context/context.interface";
 import { IContent } from "../../content.interface";
 
@@ -19,11 +20,12 @@ const resolverMap: any = {
       return episode.getQualifiedUrl();
     },
     viewCount: (
-      episode: IContent,
+      episode: Episode,
       args,
       { authData, dataSources }: IContext
     ) => {
-      return dataSources.analyticsAPI.getViewCount(episode.slug, process.env.GOOGLE_ANALYTICS_VIEW_ID);
+      if (!episode.podcastPlatformId) return null;
+      return dataSources.podcastAPI.getPlayCount(episode.podcastPlatformId);
     },
   },
 };
