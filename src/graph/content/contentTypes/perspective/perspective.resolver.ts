@@ -3,20 +3,16 @@ import { IContent } from "../../content.interface";
 
 const resolverMap: any = {
   Query: {
-    promos: (parent, args, { authData, dataSources }: IContext) => {
+    perspectives: (parent, args, { authData, dataSources }: IContext) => {
       return dataSources.contentConnector.getContent({
-        content_type: "promo",
+        content_type: "perspective",
         ...args,
       });
     },
   },
-  Promo: {
-    url: (
-      promo: IContent,
-      args,
-      { authData, dataSources }: IContext
-    ) => {
-      return promo.getUrl();
+  Perspective: {
+    url: (perspective: IContent, args, { authData, dataSources }: IContext) => {
+      return perspective.getUrl();
     },
   },
 };

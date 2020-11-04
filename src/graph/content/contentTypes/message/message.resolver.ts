@@ -12,14 +12,21 @@ const resolverMap: any = {
     },
   },
   Message: {
-    qualifiedUrl: (
+    url: async (
       message: IContent,
       args,
       { authData, dataSources }: IContext
     ) => {
-      return message.getQualifiedUrl();
+      var series = await dataSources.contentConnector.getSeries(message.id);
+      return `${process.env.CRDS_MEDIA_ENDPOINT}/series${
+        series ? "/" + series.slug : ""
+      }/${message.slug}`;
     },
-    viewCount: (message: IContent, args, { authData, dataSources }: IContext) => {
+    viewCount: (
+      message: IContent,
+      args,
+      { authData, dataSources }: IContext
+    ) => {
       return dataSources.bitmovinAnalyticsAPI.getViewCount(message.title);
     },
     series: async (
@@ -27,14 +34,7 @@ const resolverMap: any = {
       args,
       { authData, dataSources }: IContext
     ) => {
-      return dataSources.contentConnector
-        .getContent({
-          content_type: "series",
-          "videos.sys.id": message.id,
-        })
-        .then((series: IContent[]) => {
-          return series.find(() => true);
-        });
+      return dataSources.contentConnector.getSeries(message.id);
     },
   },
 };

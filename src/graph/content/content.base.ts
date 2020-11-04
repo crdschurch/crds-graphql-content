@@ -1,6 +1,13 @@
 import { IContent } from "./content.interface";
 import { ContentUtils } from "./content_utils";
 
+export class Meta {
+  public title: string;
+  public description: string;
+  public imageUrl: string;
+  public distributionChannels: string[];
+}
+
 export default class Content implements IContent {
   public title: string;
   public contentType: string;
@@ -13,6 +20,8 @@ export default class Content implements IContent {
   public imageUrl: string;
   public date: number;
   public distributionChannels: string[];
+  public searchExcluded: boolean;
+  public meta: Meta;
 
   constructor(entry) {
     var fields = entry.fields;
@@ -36,9 +45,21 @@ export default class Content implements IContent {
     this.distributionChannels =
       fields.distribution_channels &&
       fields.distribution_channels.map((c) => c.site);
+    this.searchExcluded = fields.search_excluded || false;
+    this.meta = fields.meta && {
+      description: fields.meta.fields.description,
+      title: fields.meta.fields.title,
+      imageUrl:
+        fields.meta.fields.image && fields.meta.fields.image.fields
+          ? ContentUtils.getImgixURL(fields.meta.fields.image.fields.file.url)
+          : null,
+      distributionChannels:
+        fields.meta.fields.distribution_channels &&
+        fields.meta.fields.distribution_channels.map((c) => c.site),
+    };
   }
 
-  public getQualifiedUrl(): Promise<string> {
+  public getUrl(): Promise<string> {
     return new Promise((resolve, reject) => {
       resolve(
         `${process.env.CRDS_MEDIA_ENDPOINT}/${this.contentType}s/${this.slug}`

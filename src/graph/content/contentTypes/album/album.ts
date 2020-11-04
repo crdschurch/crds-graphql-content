@@ -18,12 +18,14 @@ export default class Album extends Content {
     this.authors = getAuthors(fields.author);
     this.duration = ContentUtils.formatDuration(fields.duration);
     this.songs =
-      (fields.songs && fields.songs.map((song) => new Song(song))) || [];
+      (fields.songs &&
+        fields.songs.map((song) => song && song.fields && new Song(song))) ||
+      [];
     this.spotifyUrl = fields.spotify_url;
     this.publisher = fields.publisher;
   }
 
-  public getQualifiedUrl(): Promise<string> {
+  public getUrl(): Promise<string> {
     return new Promise((resolve, reject) => {
       resolve(`${process.env.CRDS_MUSIC_ENDPOINT}/music/${this.slug}`);
     });

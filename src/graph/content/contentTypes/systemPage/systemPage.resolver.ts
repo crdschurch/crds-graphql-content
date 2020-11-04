@@ -1,26 +1,24 @@
 import { IContext } from "../../../context/context.interface";
 import { IContent } from "../../content.interface";
+import SystemPage from "./systemPage";
 
 const resolverMap: any = {
   Query: {
-    pages: (parent, args, { authData, dataSources }: IContext) => {
+    systemPages: (parent, args, { authData, dataSources }: IContext) => {
       return dataSources.contentConnector.getContent({
-        content_type: "page",
+        content_type: "system_page",
         ...args,
       });
     },
   },
-  Page: {
-    url: (page: IContent, args, { authData, dataSources }: IContext) => {
-      return page.getUrl();
-    },
+  SystemPage: {
     viewCount: async (
-      page: IContent,
+      systemPage: SystemPage,
       args,
       { authData, dataSources }: IContext
     ) => {
       return dataSources.analyticsAPI.getViewCount(
-        await page.getUrl(),
+        systemPage.url,
         process.env.GOOGLE_ANALYTICS_VIEW_ID
       );
     },

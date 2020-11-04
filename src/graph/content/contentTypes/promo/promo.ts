@@ -13,7 +13,7 @@ export default class Promo extends Content {
     this.targetAudience = fields.target_audience;
   }
 
-  public getQualifiedUrl(): Promise<string> {
+  public getUrl(): Promise<string> {
     return new Promise((resolve, reject) => {
       resolve(this.slug);
     });

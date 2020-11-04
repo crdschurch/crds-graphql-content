@@ -2,26 +2,22 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    promos(id: [ID!], slug: [String!]): [Promo]
+    systemPages(id: [ID!], slug: [String!]): [SystemPage]
   }
 
-  type Promo implements Media {
+  type SystemPage implements Content {
     id: ID!
     title: String
+    description: String
     contentType: String!
     distributionChannels: [String!]
     meta: Meta
     searchExcluded: Boolean!
+    imageUrl: String
     likes: Int
     tags: [String!]
-    slug: String
     date: Float
-    duration: String
-    authors: [Author!]
-    category: String
-    imageUrl: String
     url: String
-    description: String
-    targetAudience: [String]
+    viewCount: Int
   }
 `;

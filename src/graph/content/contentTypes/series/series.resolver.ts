@@ -12,12 +12,12 @@ const resolverMap: any = {
     },
   },
   Series: {
-    qualifiedUrl: (
+    url: (
       series: IContent,
       args,
       { authData, dataSources }: IContext
     ) => {
-      return series.getQualifiedUrl();
+      return `${process.env.CRDS_MEDIA_ENDPOINT}/${series.contentType}/${series.slug}`;
     },
     viewCount: (
       series: IContent,

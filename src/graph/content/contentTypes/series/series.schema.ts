@@ -10,6 +10,8 @@ export default gql`
     title: String
     contentType: String!
     distributionChannels: [String!]
+    meta: Meta
+    searchExcluded: Boolean!
     likes: Int
     tags: [String!]
     date: Float
@@ -18,9 +20,9 @@ export default gql`
     authors: [Author!]
     category: String
     imageUrl: String
-    qualifiedUrl: String
+    url: String
     description: String
-    messages: [String!] #TODO: make this actually return messages. We need to convert the content service to use a data loader to make this efficient. Not a priority right now so leaving as just titles.
+    messages: [Message]
     startDate: Float
     endDate: Float
   }

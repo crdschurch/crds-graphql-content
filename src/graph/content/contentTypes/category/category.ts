@@ -11,7 +11,7 @@ export default class Category extends Content {
     );
   }
 
-  public getQualifiedUrl(): Promise<string> {
+  public getUrl(): Promise<string> {
     return new Promise((resolve, reject) => {
       resolve(`${process.env.CRDS_MEDIA_ENDPOINT}/topics/${this.slug}`);
     });

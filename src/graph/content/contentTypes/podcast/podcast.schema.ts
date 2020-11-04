@@ -10,6 +10,8 @@ export default gql`
     title: String
     contentType: String!
     distributionChannels: [String!]
+    meta: Meta
+    searchExcluded: Boolean!
     likes: Int
     tags: [String!]
     slug: String
@@ -18,7 +20,7 @@ export default gql`
     authors: [Author!]
     category: String
     imageUrl: String
-    qualifiedUrl: String
+    url: String
     description: String
     episodes: [Episode!]
   }

@@ -8,8 +8,8 @@ const resolverMap: any = {
     }
   },
   LifeStageContent: {
-    qualifiedUrl: (parent: IContent, args, { authData, dataSources }: IContext) => {
-      return parent.getQualifiedUrl();
+    url: (parent: IContent, args, { authData, dataSources }: IContext) => {
+      return parent.getUrl();
     }
   }
 };

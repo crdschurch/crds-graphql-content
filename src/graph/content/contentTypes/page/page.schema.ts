@@ -14,11 +14,13 @@ export default gql`
     category: String
     contentType: String!
     distributionChannels: [String!]
+    meta: Meta
+    searchExcluded: Boolean!
     likes: Int
     tags: [String!]
     slug: String
     imageUrl: String
-    qualifiedUrl: String
+    url: String
     body: String
     viewCount: Int
   }

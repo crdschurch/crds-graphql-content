@@ -11,12 +11,12 @@ const resolverMap: any = {
     },
   },
   Author: {
-    qualifiedUrl: (
+    url: (
       author: IContent,
       args,
       { authData, dataSources }: IContext
     ) => {
-      return author.getQualifiedUrl();
+      return author.getUrl();
     },
     viewCount: (
       author: IContent,

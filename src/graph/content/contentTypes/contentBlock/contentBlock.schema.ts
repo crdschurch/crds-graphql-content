@@ -15,6 +15,8 @@ export default gql`
     title: String
     contentType: String!
     distributionChannels: [String!]
+    meta: Meta
+    searchExcluded: Boolean!
     likes: Int
     tags: [String!]
     date: Float
