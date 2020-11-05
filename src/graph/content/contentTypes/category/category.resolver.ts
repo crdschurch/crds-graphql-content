@@ -11,13 +11,6 @@ const resolverMap: any = {
     },
   },
   category: {
-    url: (
-      category: IContent,
-      args,
-      { authData, dataSources }: IContext
-    ) => {
-      return category.getUrl();
-    },
     viewCount: async (
       category: IContent,
       args,

@@ -22,6 +22,7 @@ export default class Content implements IContent {
   public distributionChannels: string[];
   public searchExcluded: boolean;
   public meta: Meta;
+  public url: string;
 
   constructor(entry) {
     var fields = entry.fields;
@@ -46,17 +47,18 @@ export default class Content implements IContent {
       fields.distribution_channels &&
       fields.distribution_channels.map((c) => c.site);
     this.searchExcluded = fields.search_excluded || false;
-    this.meta = fields.meta && {
-      description: fields.meta.fields.description,
-      title: fields.meta.fields.title,
-      imageUrl:
-        fields.meta.fields.image && fields.meta.fields.image.fields
-          ? ContentUtils.getImgixURL(fields.meta.fields.image.fields.file.url)
-          : null,
-      distributionChannels:
-        fields.meta.fields.distribution_channels &&
-        fields.meta.fields.distribution_channels.map((c) => c.site),
-    };
+    this.meta = fields.meta &&
+      fields.meta.fields && {
+        description: fields.meta.fields.description,
+        title: fields.meta.fields.title,
+        imageUrl:
+          fields.meta.fields.image && fields.meta.fields.image.fields
+            ? ContentUtils.getImgixURL(fields.meta.fields.image.fields.file.url)
+            : null,
+        distributionChannels:
+          fields.meta.fields.distribution_channels &&
+          fields.meta.fields.distribution_channels.map((c) => c.site),
+      };
   }
 
   public getUrl(): Promise<string> {

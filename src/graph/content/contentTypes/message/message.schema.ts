@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    messages(id: [ID!], slug: [String!]): [Message]
+    messages(id: [ID!], limit: Int, skip: Int): [Message]
   }
 
   type Message implements Media {

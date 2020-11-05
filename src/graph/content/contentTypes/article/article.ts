@@ -15,7 +15,7 @@ export default class Article extends Content {
     var fields = entry.fields;
     this.authors = getAuthors(fields.author);
     this.duration = ContentUtils.formatDuration(fields.duration);
-    this.body = fields.body.substring(0, fields.body.indexOf('\n\n') || fields.body.indexOf('\n'));
+    this.body = fields.body;
     this.likes = fields.likes;
     this.leadText = fields.lead_text;
   }

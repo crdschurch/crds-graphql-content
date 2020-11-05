@@ -23,5 +23,6 @@ export default gql`
     url: String
     description: String
     viewCount: Int
+    podcast: Podcast
   }
 `;

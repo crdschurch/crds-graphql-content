@@ -63,8 +63,12 @@ export class ContentConnector implements IContentConnector {
           .flatMap((f) => f.id)
           .filter((id) => id);
 
+        var filter = filters[0];
+        var query = { ...filter };
+        delete query.id;
+
         return {
-          content_type: type,
+          ...query,
           ...(ids.length && { id: ids }),
         };
       });
