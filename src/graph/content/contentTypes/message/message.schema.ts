@@ -24,5 +24,7 @@ export default gql`
     description: String
     series: Series
     viewCount: Int
+    subTitles: String
+    subTitlesFileUrl: String
   }
 `;
