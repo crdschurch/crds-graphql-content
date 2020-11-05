@@ -22,7 +22,7 @@ export default class Episode extends Content {
     this.podcastPlatformId = matches && matches[0];
   }
 
-  public getQualifiedUrl(): Promise<string> {
+  public getUrl(): Promise<string> {
     return new Promise((resolve, reject) => {
       resolve(
         `${process.env.CRDS_MEDIA_ENDPOINT}/podcasts/${this.podcast.slug}/${this.slug}`

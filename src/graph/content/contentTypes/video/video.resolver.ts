@@ -11,12 +11,12 @@ const resolverMap: any = {
     },
   },
   Video: {
-    qualifiedUrl: (
+    url: (
       video: IContent,
       args,
       { authData, dataSources }: IContext
     ) => {
-      return video.getQualifiedUrl();
+      return video.getUrl();
     },
     viewCount: (
         video: IContent,

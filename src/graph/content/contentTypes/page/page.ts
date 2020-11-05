@@ -13,7 +13,7 @@ export default class Page extends Content {
     this.slug = fields.permalink;
   }
 
-  public getQualifiedUrl(): Promise<string> {
+  public getUrl(): Promise<string> {
     return new Promise((resolve, reject) => {
       resolve(`${process.env.CRDS_APP_CLIENT_ENDPOINT}${this.slug}`);
     });

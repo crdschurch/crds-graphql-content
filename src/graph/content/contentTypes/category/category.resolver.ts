@@ -11,20 +11,13 @@ const resolverMap: any = {
     },
   },
   category: {
-    qualifiedUrl: (
-      category: IContent,
-      args,
-      { authData, dataSources }: IContext
-    ) => {
-      return category.getQualifiedUrl();
-    },
     viewCount: async (
       category: IContent,
       args,
       { authData, dataSources }: IContext
     ) => {
       return dataSources.analyticsAPI.getViewCount(
-        await category.getQualifiedUrl(),
+        await category.getUrl(),
         process.env.GOOGLE_ANALYTICS_VIEW_ID
       );
     },

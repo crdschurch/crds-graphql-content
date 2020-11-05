@@ -2,10 +2,10 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    promos(id: [ID!], slug: [String!]): [Promo]
+    searchWidgets(id: [ID!], slug: [String!]): [SearchWidget]
   }
 
-  type Promo implements Media {
+  type SearchWidget implements Content {
     id: ID!
     title: String
     contentType: String!
@@ -14,14 +14,8 @@ export default gql`
     searchExcluded: Boolean!
     likes: Int
     tags: [String!]
-    slug: String
     date: Float
-    duration: String
-    authors: [Author!]
-    category: String
-    imageUrl: String
+    body: String
     url: String
-    description: String
-    targetAudience: [String]
   }
 `;

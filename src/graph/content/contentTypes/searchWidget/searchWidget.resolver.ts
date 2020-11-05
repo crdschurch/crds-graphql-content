@@ -1,26 +1,24 @@
 import { IContext } from "../../../context/context.interface";
 import { IContent } from "../../content.interface";
+import SearchWidget from "./searchWidget";
 
 const resolverMap: any = {
   Query: {
-    pages: (parent, args, { authData, dataSources }: IContext) => {
+    searchWidgets: (parent, args, { authData, dataSources }: IContext) => {
       return dataSources.contentConnector.getContent({
-        content_type: "page",
+        content_type: "search_widget",
         ...args,
       });
     },
   },
-  Page: {
-    url: (page: IContent, args, { authData, dataSources }: IContext) => {
-      return page.getUrl();
-    },
+  SearchWidget: {
     viewCount: async (
-      page: IContent,
+      searchWidget: SearchWidget,
       args,
       { authData, dataSources }: IContext
     ) => {
       return dataSources.analyticsAPI.getViewCount(
-        await page.getUrl(),
+        searchWidget.url,
         process.env.GOOGLE_ANALYTICS_VIEW_ID
       );
     },

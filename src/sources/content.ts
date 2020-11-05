@@ -10,43 +10,56 @@ export class ContentService implements IContentService {
     this.client = createClient({
       accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       space: process.env.CONTENTFUL_SPACE_ID,
-      environment: process.env.CONTENTFUL_ENV
+      environment: process.env.CONTENTFUL_ENV,
     });
   }
 
-  private getNextEntries(filters: object, entries, skip): Promise<any> {
+  private getEntries(filters: object, entries, skip, limit): Promise<any> {
     var params = {
       skip: skip,
-      limit: 1000,
-      include: 10
+      limit: limit || 1000,
+      include: 10,
+      ...filters,
     };
-
-    Object.assign(params, filters);
 
     return this.client
       .getEntries(params)
-      .then(response => {
+      .then((response) => {
         entries = [...entries, ...response.items];
         if (response.items.length !== 1000) return entries;
-        return this.getNextEntries(filters, entries, skip + 1000);
+        return this.getEntries(filters, entries, skip + (limit || 1000), limit);
       })
-      .catch(ex => {
+      .catch((ex) => {
         throw ex;
       });
   }
 
-  public getContent(filters: object): Promise<any> {
-    const newFilters = {};
-    Object.keys(filters).forEach(key => {
-      var newKey = key;
-      if (key != "content_type") newKey = "fields." + newKey;
-      newKey = newKey.replace("fields.id", "sys.id");
-      if (Array.isArray(filters[key])) {
-        newKey = `${newKey}[in]`;
-        filters[key] = filters[key].join(",");
-      }
-      newFilters[newKey] = filters[key];
-    });
-    return this.getNextEntries(newFilters, [], 0);
+  public async getContent(filters: any): Promise<any> {
+    if (!Array.isArray(filters)) filters = [filters];
+    return await Promise.all(
+      filters.map(async (filterGroup) => {
+        var limit = filterGroup.limit;
+        var skip = filterGroup.skip;
+        delete filterGroup.limit;
+        delete filterGroup.skip;
+        const newFilters = {};
+        Object.keys(filterGroup).forEach((key) => {
+          var newKey = key;
+          if (key != "content_type") newKey = "fields." + newKey;
+          newKey = newKey.replace("fields.id", "sys.id");
+          if (Array.isArray(filterGroup[key])) {
+            newKey = `${newKey}[in]`;
+            filterGroup[key] = filterGroup[key].join(",");
+          }
+          newFilters[newKey] = filterGroup[key];
+        });
+
+        var entries = await this.getEntries(newFilters, [], skip || 0, limit);
+        return {
+          filters: filterGroup,
+          entries: entries,
+        };
+      })
+    );
   }
 }

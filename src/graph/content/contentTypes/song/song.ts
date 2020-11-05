@@ -26,14 +26,4 @@ export default class Song extends Content {
         : null;
     this.imageUrl = image || this.album.imageUrl;
   }
-
-  public getQualifiedUrl(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      resolve(
-        this.album
-          ? `${process.env.CRDS_MUSIC_ENDPOINT}/music/${this.album.slug}/${this.slug}`
-          : `${process.env.CRDS_MEDIA_ENDPOINT}/${this.contentType}s/${this.slug}`
-      );
-    });
-  }
 }

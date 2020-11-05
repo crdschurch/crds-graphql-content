@@ -12,8 +12,13 @@ const resolverMap: any = {
     },
   },
   Album: {
-    qualifiedUrl: (album: Album, args, { authData, dataSources }: IContext) => {
-      return album.getQualifiedUrl();
+    url: (album: Album, args, { authData, dataSources }: IContext) => {
+      return album.getUrl();
+    },
+    songs: (album: Album, args, { authData, dataSources }: IContext) => {
+      return album.songs.filter(s => s).map((song) => {
+        return { ...song, album: album };
+      });
     },
     viewCount: (album: Album, args, { authData, dataSources }: IContext) => {
       return dataSources.musicAPI.getPlayCount(

@@ -16,7 +16,7 @@ const resolverMap: any = {
         .then((albums: Album[]) => {
           return songs.map((song: any) => {
             const album = albums.find((a) =>
-              a.songs.find((s) => s.id == song.id)
+              a.songs.find((s) => s && s.id == song.id)
             );
             if (album) song.album = album;
             return song;
@@ -25,12 +25,10 @@ const resolverMap: any = {
     },
   },
   Song: {
-    qualifiedUrl: (
-      song: IContent,
-      args,
-      { authData, dataSources }: IContext
-    ) => {
-      return song.getQualifiedUrl();
+    url: (song: Song, args, { authData, dataSources }: IContext) => {
+      return song.album
+        ? `${process.env.CRDS_MUSIC_ENDPOINT}/music/${song.album.slug}/${song.slug}`
+        : `${process.env.CRDS_MEDIA_ENDPOINT}/${song.contentType}s/${song.slug}`;
     },
     viewCount: async (
       song: Song,
@@ -38,8 +36,10 @@ const resolverMap: any = {
       { authData, dataSources }: IContext
     ) => {
       return dataSources.musicAPI.getPlayCount(
-        song.album && song.album.spotifyUrl.split("/").pop(),
-        song.spotifyUrl.split("/").pop(),
+        song.album &&
+          song.album.spotifyUrl &&
+          song.album.spotifyUrl.split("/").pop(),
+        song.spotifyUrl && song.spotifyUrl.split("/").pop(),
         song.title
       );
     },

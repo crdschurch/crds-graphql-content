@@ -11,12 +11,12 @@ const resolverMap: any = {
     },
   },
   Podcast: {
-    qualifiedUrl: (
+    url: (
       podcast: IContent,
       args,
       { authData, dataSources }: IContext
     ) => {
-      return podcast.getQualifiedUrl();
+      return podcast.getUrl();
     },
     episodes: (
       podcast: IContent,

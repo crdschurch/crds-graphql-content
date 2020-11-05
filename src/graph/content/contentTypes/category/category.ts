@@ -6,14 +6,13 @@ export default class Category extends Content {
     super(entry);
 
     var fields = entry.fields;
-    this.description = ContentUtils.removeMarkdown(
-      fields.subtitle + " " + fields.body
-    );
-  }
-
-  public getQualifiedUrl(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      resolve(`${process.env.CRDS_MEDIA_ENDPOINT}/topics/${this.slug}`);
-    });
+    this.description =
+      !fields.subtitle && !fields.body
+        ? null
+        : [
+            ContentUtils.removeMarkdown(fields.subtitle),
+            ContentUtils.removeMarkdown(fields.body),
+          ].join(" ");
+    this.url = `${process.env.CRDS_MEDIA_ENDPOINT}/topics/${this.slug}`;
   }
 }

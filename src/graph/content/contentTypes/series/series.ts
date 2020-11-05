@@ -1,10 +1,12 @@
+import { Message } from "..";
 import Content from "../../content.base";
+import { ContentFactory } from "../../content.factory";
 import { ContentUtils } from "../../content_utils";
 
 export default class Series extends Content {
   public startDate: number;
   public endDate: number;
-  public messages: string[];
+  public messages: Message[];
 
   constructor(entry) {
     super(entry);
@@ -15,15 +17,7 @@ export default class Series extends Content {
     this.messages =
       fields.videos &&
       fields.videos
-        .map((video) => video.fields && video.fields.title)
-        .filter((m) => m);
-  }
-
-  public getQualifiedUrl(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      resolve(
-        `${process.env.CRDS_MEDIA_ENDPOINT}/${this.contentType}/${this.slug}`
-      );
-    });
+        .filter((m) => m && m.fields)
+        .map((video) => video.fields && ContentFactory.instantiate(video));
   }
 }

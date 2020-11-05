@@ -12,12 +12,12 @@ const resolverMap: any = {
     },
   },
   Episode: {
-    qualifiedUrl: (
+    url: (
       episode: IContent,
       args,
       { authData, dataSources }: IContext
     ) => {
-      return episode.getQualifiedUrl();
+      return episode.getUrl();
     },
     viewCount: (
       episode: Episode,

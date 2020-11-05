@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    articles(id: [ID!], slug: [String!]): [Article]
+    articles(id: [ID!], limit: Int, skip: Int): [Article]
   }
 
   type Article implements Media {
@@ -10,6 +10,8 @@ export default gql`
     title: String
     contentType: String!
     distributionChannels: [String!]
+    meta: Meta
+    searchExcluded: Boolean!
     likes: Int
     tags: [String!]
     date: Float
@@ -18,7 +20,7 @@ export default gql`
     authors: [Author!]
     category: String
     imageUrl: String
-    qualifiedUrl: String
+    url: String
     body: String
     viewCount: Int
     leadText: String
