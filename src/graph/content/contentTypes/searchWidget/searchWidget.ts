@@ -14,6 +14,6 @@ export default class SearchWidget extends Content {
         ? ContentUtils.getImgixURL(fields.meta.fields.image.fields.file.url)
         : this.imageUrl;
     this.body = fields.body;
-    this.url = `${process.env.CRDS_APP_CLIENT_ENDPOINT}${this.slug}`;
+    this.url = fields.url;
   }
 }
