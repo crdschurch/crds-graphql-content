@@ -20,7 +20,7 @@ export default gql`
     tags: [String!]
     slug: String
     imageUrl: String
-    url: String
+    qualifiedUrl: String
     description: String
     viewCount: Int
     album: Album

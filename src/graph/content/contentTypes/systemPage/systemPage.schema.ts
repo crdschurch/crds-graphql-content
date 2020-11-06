@@ -17,7 +17,7 @@ export default gql`
     likes: Int
     tags: [String!]
     date: Float
-    url: String
+    qualifiedUrl: String
     viewCount: Int
   }
 `;

@@ -9,7 +9,7 @@ export default class Location extends Content {
   public openHours: string;
   public imageUrl: string;
   public site_id: string;
-  public url: string;
+  public qualifiedUrl: string;
 
   constructor(entry) {
     super(entry);
@@ -24,6 +24,6 @@ export default class Location extends Content {
     this.openHours = fields.open_hours;
     this.description = fields.description; 
     this.site_id = fields.site_id;
-    this.url = `${process.env.CRDS_APP_CLIENT_ENDPOINT}/${this.slug}`;
+    this.qualifiedUrl = `${process.env.CRDS_APP_CLIENT_ENDPOINT}/${this.slug}`;
   }
 }

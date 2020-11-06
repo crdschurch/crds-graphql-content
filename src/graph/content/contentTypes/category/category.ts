@@ -13,6 +13,6 @@ export default class Category extends Content {
             ContentUtils.removeMarkdown(fields.subtitle),
             ContentUtils.removeMarkdown(fields.body),
           ].join(" ");
-    this.url = `${process.env.CRDS_MEDIA_ENDPOINT}/topics/${this.slug}`;
+    this.qualifiedUrl = `${process.env.CRDS_MEDIA_ENDPOINT}/topics/${this.slug}`;
   }
 }

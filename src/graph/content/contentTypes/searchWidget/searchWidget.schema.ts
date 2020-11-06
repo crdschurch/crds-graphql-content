@@ -16,7 +16,7 @@ export default gql`
     tags: [String!]
     date: Float
     body: String
-    url: String
+    qualifiedUrl: String
     imageUrl: String
   }
 `;

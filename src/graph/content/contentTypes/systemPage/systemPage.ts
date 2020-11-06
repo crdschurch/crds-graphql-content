@@ -2,7 +2,7 @@ import { ContentUtils } from "../../content_utils";
 import Content from "../../content.base";
 
 export default class SystemPage extends Content {
-  public url: string;
+  public qualifiedUrl: string;
 
   constructor(entry) {
     super(entry);
@@ -15,7 +15,7 @@ export default class SystemPage extends Content {
     this.description = fields.description;
     this.slug = fields.url;
     var r = new RegExp("^(?:[a-z]+:)?//", "i");
-    this.url = r.test(fields.url)
+    this.qualifiedUrl = r.test(fields.url)
       ? fields.url
       : `${process.env.CRDS_CLIENT_ENDPOINT}${fields.url}`;
   }

@@ -22,7 +22,7 @@ export default class Content implements IContent {
   public distributionChannels: string[];
   public searchExcluded: boolean;
   public meta: Meta;
-  public url: string;
+  public qualifiedUrl: string;
 
   constructor(entry) {
     var fields = entry.fields;

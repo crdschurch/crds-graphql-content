@@ -36,7 +36,7 @@ export default gql`
     authors: [Author!]
     category: String
     imageUrl: String
-    url: String
+    qualifiedUrl: String
     description: String
     lifeStageid: ID!
   }
