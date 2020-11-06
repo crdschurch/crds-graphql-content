@@ -13,6 +13,6 @@ export default gql`
     imageUrl: String @requires(fields: "isPhysicalLocation")
     tags: [String!] @requires(fields: "isPhysicalLocation")
     contentType: String @requires(fields: "isPhysicalLocation")
-    url: String
+    qualifiedUrl: String
   }
 `;

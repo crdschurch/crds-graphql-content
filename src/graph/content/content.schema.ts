@@ -53,7 +53,7 @@ const ContentSchema = gql`
     authors: [Author!]
     category: String
     imageUrl: String
-    url: String
+    qualifiedUrl: String
   }
 `;
 

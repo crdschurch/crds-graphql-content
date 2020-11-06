@@ -18,7 +18,7 @@ const resolverMap: any = {
       { authData, dataSources }: IContext
     ) => {
       return dataSources.analyticsAPI.getViewCount(
-        searchWidget.url,
+        searchWidget.qualifiedUrl,
         process.env.GOOGLE_ANALYTICS_VIEW_ID
       );
     },

@@ -3,7 +3,7 @@ import Content from "../../content.base";
 
 export default class SearchWidget extends Content {
   public body: string;
-  public url: string;
+  public qualifiedUrl: string;
 
   constructor(entry) {
     super(entry);
@@ -14,6 +14,6 @@ export default class SearchWidget extends Content {
         ? ContentUtils.getImgixURL(fields.meta.fields.image.fields.file.url)
         : this.imageUrl;
     this.body = fields.body;
-    this.url = fields.url;
+    this.qualifiedUrl = fields.url;
   }
 }

@@ -20,7 +20,7 @@ export default gql`
     authors: [Author!]
     category: String
     imageUrl: String
-    url: String
+    qualifiedUrl: String
     description: String
     series: Series
     viewCount: Int
