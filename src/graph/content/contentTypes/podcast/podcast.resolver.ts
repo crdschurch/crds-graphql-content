@@ -11,7 +11,7 @@ const resolverMap: any = {
     },
   },
   Podcast: {
-    url: (
+    qualifiedUrl: (
       podcast: IContent,
       args,
       { authData, dataSources }: IContext

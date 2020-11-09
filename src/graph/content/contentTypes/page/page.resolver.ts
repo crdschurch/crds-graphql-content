@@ -11,7 +11,7 @@ const resolverMap: any = {
     },
   },
   Page: {
-    url: (page: IContent, args, { authData, dataSources }: IContext) => {
+    qualifiedUrl: (page: IContent, args, { authData, dataSources }: IContext) => {
       return page.getUrl();
     },
     viewCount: async (

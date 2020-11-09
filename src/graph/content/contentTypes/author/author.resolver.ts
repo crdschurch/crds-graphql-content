@@ -11,7 +11,7 @@ const resolverMap: any = {
     },
   },
   Author: {
-    url: (
+    qualifiedUrl: (
       author: IContent,
       args,
       { authData, dataSources }: IContext

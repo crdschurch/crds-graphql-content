@@ -12,7 +12,7 @@ const resolverMap: any = {
     },
   },
   Episode: {
-    url: (
+    qualifiedUrl: (
       episode: IContent,
       args,
       { authData, dataSources }: IContext

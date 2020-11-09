@@ -11,7 +11,7 @@ const resolverMap: any = {
     },
   },
   Article: {
-    url: (
+    qualifiedUrl: (
       article: IContent,
       args,
       { authData, dataSources }: IContext
