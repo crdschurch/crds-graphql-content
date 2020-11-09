@@ -11,7 +11,7 @@ const resolverMap: any = {
     },
   },
   Promo: {
-    url: (
+    qualifiedUrl: (
       promo: IContent,
       args,
       { authData, dataSources }: IContext

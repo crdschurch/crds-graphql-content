@@ -25,7 +25,7 @@ const resolverMap: any = {
     },
   },
   Song: {
-    url: (song: Song, args, { authData, dataSources }: IContext) => {
+    qualifiedUrl: (song: Song, args, { authData, dataSources }: IContext) => {
       return song.album
         ? `${process.env.CRDS_MUSIC_ENDPOINT}/music/${song.album.slug}/${song.slug}`
         : `${process.env.CRDS_MEDIA_ENDPOINT}/${song.contentType}s/${song.slug}`;

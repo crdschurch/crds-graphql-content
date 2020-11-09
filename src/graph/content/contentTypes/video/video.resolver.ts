@@ -11,7 +11,7 @@ const resolverMap: any = {
     },
   },
   Video: {
-    url: (
+    qualifiedUrl: (
       video: IContent,
       args,
       { authData, dataSources }: IContext

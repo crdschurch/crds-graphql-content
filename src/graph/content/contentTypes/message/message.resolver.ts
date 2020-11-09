@@ -12,7 +12,7 @@ const resolverMap: any = {
     },
   },
   Message: {
-    url: async (
+    qualifiedUrl: async (
       message: IContent,
       args,
       { authData, dataSources }: IContext

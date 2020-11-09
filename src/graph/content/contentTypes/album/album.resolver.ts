@@ -12,7 +12,7 @@ const resolverMap: any = {
     },
   },
   Album: {
-    url: (album: Album, args, { authData, dataSources }: IContext) => {
+    qualifiedUrl: (album: Album, args, { authData, dataSources }: IContext) => {
       return album.getUrl();
     },
     songs: (album: Album, args, { authData, dataSources }: IContext) => {

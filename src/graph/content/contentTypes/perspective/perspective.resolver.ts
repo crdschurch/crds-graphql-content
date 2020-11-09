@@ -11,7 +11,7 @@ const resolverMap: any = {
     },
   },
   Perspective: {
-    url: (perspective: IContent, args, { authData, dataSources }: IContext) => {
+    qualifiedUrl: (perspective: IContent, args, { authData, dataSources }: IContext) => {
       return perspective.getUrl();
     },
   },
