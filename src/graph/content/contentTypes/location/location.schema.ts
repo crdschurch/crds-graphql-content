@@ -14,5 +14,6 @@ export default gql`
     tags: [String!] @requires(fields: "isPhysicalLocation")
     contentType: String @requires(fields: "isPhysicalLocation")
     qualifiedUrl: String
+    meta: Meta
   }
 `;
