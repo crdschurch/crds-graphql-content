@@ -23,5 +23,7 @@ export default gql`
     qualifiedUrl: String
     description: String
     viewCount: Int
+    subTitles: String
+    subTitlesFileUrl: String
   }
 `;
