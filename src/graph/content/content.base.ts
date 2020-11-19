@@ -42,7 +42,7 @@ export default class Content implements IContent {
     this.likes = fields.interaction_count;
     this.id = entry.sys.id;
     this.slug = fields.slug;
-    this.date = new Date(fields.published_at).getTime() / 1000;
+    this.date = Math.floor(new Date(fields.published_at || entry.sys.createdAt).getTime() / 1000);
     this.distributionChannels =
       fields.distribution_channels &&
       fields.distribution_channels.map((c) => c.site);
