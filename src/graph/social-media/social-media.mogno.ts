@@ -1,7 +1,8 @@
 import { MongoDataSource } from "apollo-datasource-mongodb";
 import { ISocialMediaMongo } from "./social-media.interface";
 
-export class SocialMediaMongo extends MongoDataSource
+export class SocialMediaMongo
+  extends MongoDataSource
   implements ISocialMediaMongo {
   constructor(config) {
     super(config);
@@ -20,15 +21,15 @@ export class SocialMediaMongo extends MongoDataSource
       })
       .limit(limit || 0)
       .skip(offset || 0)
-      .sort({"post.timestamp": -1})
+      .sort({ "post.timestamp": -1 })
       .toArray()
       .then((document) => {
         if (!document) return null;
         return document
           .map((a) => {
             a.post.timestamp = new Date(a.post.timestamp).getTime() / 1000;
-            a.post.thumbnailUrl = a.post.permalink + "media/?size=t";
-            a.post.mediaUrl = a.post.permalink + "media/?size=m";
+            a.post.thumbnailUrl = a.post.mediaUrl;
+            a.post.mediaUrl = a.post.mediaUrl;
             return a.post;
           })
           .sort((a, b) => {
