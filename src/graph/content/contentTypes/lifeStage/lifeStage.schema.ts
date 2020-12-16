@@ -10,8 +10,14 @@ export default gql`
     title: String
     description: String
     imageUrl: String!
+    date: Float
     contentTotal: String!
     contentType: String!
+    distributionChannels: [String!]
+    meta: Meta
+    searchExcluded: Boolean!
+    likes: Int
+    tags: [String!]
     content: [LifeStageContent]
   }
 
@@ -19,7 +25,13 @@ export default gql`
     id: ID!
     title: String
     contentType: String!
+    distributionChannels: [String!]
+    meta: Meta
+    searchExcluded: Boolean!
+    likes: Int
+    tags: [String!]
     slug: String
+    date: Float
     duration: String
     authors: [Author!]
     category: String

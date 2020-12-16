@@ -8,6 +8,8 @@ export default class Location extends Content {
   public address: string;
   public openHours: string;
   public imageUrl: string;
+  public site_id: string;
+  public qualifiedUrl: string;
 
   constructor(entry) {
     super(entry);
@@ -20,11 +22,8 @@ export default class Location extends Content {
     this.address = fields.address;
     this.serviceTimes = fields.service_times;
     this.openHours = fields.open_hours;
-  }
-
-  public getQualifiedUrl(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      resolve(`${process.env.CRDS_APP_CLIENT_ENDPOINT}/${this.slug}`);
-    });
+    this.description = fields.description; 
+    this.site_id = fields.site_id;
+    this.qualifiedUrl = `${process.env.CRDS_APP_CLIENT_ENDPOINT}/${this.slug}`;
   }
 }

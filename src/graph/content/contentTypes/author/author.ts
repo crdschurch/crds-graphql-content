@@ -1,15 +1,15 @@
 import Content from "../../content.base";
 
 export default class Author extends Content {
-
   public fullName: string;
+  public summary: string;
 
   constructor(entry) {
     super(entry);
 
     var fields = entry.fields;
     this.title = fields.full_name;
-    this.description = fields.summary;
+    this.summary = fields.summary;
     this.fullName = fields.full_name;
   }
 }
@@ -17,5 +17,5 @@ export default class Author extends Content {
 export function getAuthors(authors: any): Author[] {
   if (!!!authors) return null;
   if (!authors.length) return [new Author(authors)];
-  return authors.map(author => new Author(author));
+  return authors.map((author) => new Author(author));
 }
