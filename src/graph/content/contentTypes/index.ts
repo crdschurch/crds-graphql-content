@@ -16,7 +16,7 @@ import LifeStage from "./lifeStage/lifeStage";
 import ContentBlock from "./contentBlock/contentBlock";
 import SystemPage from "./systemPage/systemPage";
 import SearchWidget from "./searchWidget/searchWidget";
-import SignUpForm from "./SignUp/SignUp";
+import SignUpForm from "./signUp/signUp";
 
 export {
   Album,
