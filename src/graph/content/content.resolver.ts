@@ -18,6 +18,7 @@ import videoResolver from "./contentTypes/video/video.resolver";
 import locationResolver from "./contentTypes/location/location.resolver";
 import systemPageResolver from "./contentTypes/systemPage/systemPage.resolver";
 import searchWidgetResolver from "./contentTypes/searchWidget/searchWidget.resolver";
+import signUpResolver from "./contentTypes/signUp/signUp.resolver";
 
 import camelCase from "camelcase";
 import { merge } from "lodash";
@@ -57,5 +58,6 @@ export default merge(
   videoResolver,
   locationResolver,
   systemPageResolver,
-  searchWidgetResolver
+  searchWidgetResolver,
+  signUpResolver
 );
