@@ -8,7 +8,10 @@ export default class Page extends Content {
     super(entry);
 
     var fields = entry.fields;
-    this.imageUrl = fields.meta && fields.meta.fields.image ? ContentUtils.getImgixURL(fields.meta.fields.image.fields.file.url) : this.imageUrl;
+    this.imageUrl =
+      fields.meta && fields.meta.fields && fields.meta.fields.image
+        ? ContentUtils.getImgixURL(fields.meta.fields.image.fields.file.url)
+        : this.imageUrl;
     this.body = fields.body;
     this.slug = fields.permalink;
   }
@@ -19,4 +22,3 @@ export default class Page extends Content {
     });
   }
 }
-

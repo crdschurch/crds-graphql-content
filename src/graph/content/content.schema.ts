@@ -14,6 +14,7 @@ import VideoSchema from "./contentTypes/video/video.schema";
 import LifeStageSchema from "./contentTypes/lifeStage/lifeStage.schema";
 import ContentBlockSchema from "./contentTypes/contentBlock/contentBlock.schema";
 import LocationSchema from "./contentTypes/location/location.schema";
+import SignUpSchema from "./contentTypes/signUp/signUp.schema";
 import SongSchema from "./contentTypes/song/song.schema";
 import SystemPageSchema from "./contentTypes/systemPage/systemPage.schema";
 import SearchWidget from "./contentTypes/searchWidget/searchWidget.schema";
@@ -77,4 +78,5 @@ export default [
   LocationSchema,
   SystemPageSchema,
   SearchWidget,
+  SignUpSchema
 ];

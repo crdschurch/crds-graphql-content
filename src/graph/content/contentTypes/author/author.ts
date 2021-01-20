@@ -8,6 +8,7 @@ export default class Author extends Content {
     super(entry);
 
     var fields = entry.fields;
+    if (!fields) return;
     this.title = fields.full_name;
     this.summary = fields.summary;
     this.fullName = fields.full_name;

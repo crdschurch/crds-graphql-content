@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    pages(id: [ID!], slug: [String!]): [Page]
+    pages(id: [ID!], slug: [String!], limit: Int, skip: Int): [Page]
   }
 
   type Page implements Media {
