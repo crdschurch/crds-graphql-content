@@ -22,7 +22,7 @@ export default class SignUpForm extends Content {
     this.opportunityId = fields.opportunity;
     this.groupId = fields.group;
     this.existingMemberContent = fields.existingMember;
-    this.successContent = fields.sucess;
+    this.successContent = fields.success;
     this.waitListContent = fields.waitList;
     this.fullContent = fields.full;
     this.waitListSuccessContent = fields.waitSuccess;
