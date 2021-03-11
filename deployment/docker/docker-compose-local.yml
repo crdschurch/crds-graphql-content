@@ -1,0 +1,15 @@
+version: '3'
+services:
+  content:
+    build:
+      context: ../../
+      dockerfile: ./deployment/docker/Dockerfile
+    container_name: content
+    ports:
+      - 8003:8003
+    env_file: 
+      - .env
+    entrypoint: 
+      - ./deployment/docker/entrypoint-local.sh
+    volumes:
+      - ../../:/usr/src

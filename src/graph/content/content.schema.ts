@@ -3,6 +3,7 @@ import AlbumSchema from "./contentTypes/album/album.schema";
 import ArticleSchema from "./contentTypes/article/article.schema";
 import AuthorSchema from "./contentTypes/author/author.schema";
 import CategorySchema from "./contentTypes/category/category.schema";
+import EngagementBlockSchema from "./contentTypes/engagementBlock/engagementBlock.schema";
 import EpisodeSchema from "./contentTypes/episode/episode.schema";
 import MessageSchema from "./contentTypes/message/message.schema";
 import PageSchema from "./contentTypes/page/page.schema";
@@ -63,6 +64,7 @@ export default [
   AlbumSchema,
   AuthorSchema,
   CategorySchema,
+  EngagementBlockSchema,
   EpisodeSchema,
   MessageSchema,
   PageSchema,

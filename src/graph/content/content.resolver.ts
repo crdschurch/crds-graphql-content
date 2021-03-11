@@ -5,6 +5,7 @@ import articleResolver from "./contentTypes/article/article.resolver";
 import authorResolver from "./contentTypes/author/author.resolver";
 import categoryResolver from "./contentTypes/category/category.resolver";
 import contentBlockResolver from "./contentTypes/contentBlock/contentBlock.resolver";
+import engagementBlockResolver from "./contentTypes/engagementBlock/engagementBlock.resolver";
 import episodeResolver from "./contentTypes/episode/episode.resolver";
 import lifeStageResolver from "./contentTypes/lifeStage/lifeStage.resolver";
 import messageResolver from "./contentTypes/message/message.resolver";
@@ -46,6 +47,7 @@ export default merge(
   authorResolver,
   categoryResolver,
   contentBlockResolver,
+  engagementBlockResolver,
   episodeResolver,
   lifeStageResolver,
   messageResolver,

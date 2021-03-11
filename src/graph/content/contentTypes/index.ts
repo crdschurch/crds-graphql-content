@@ -3,6 +3,7 @@ import Article from "./article/article";
 import Author from "./author/author";
 import Category from "./category/category";
 import Episode from "./episode/episode";
+import EngagementBlock from "./engagementBlock/engagementBlock";
 import Location from "./location/location";
 import Message from "./message/message";
 import Page from "./page/page";
@@ -24,6 +25,7 @@ export {
   Author,
   Category,
   Episode,
+  EngagementBlock,
   Location,
   Message,
   Page,
