@@ -1,6 +1,6 @@
 import Content from "../../content.base";
 
-export default class Author extends Content {
+export default class ContentBlock extends Content {
   public content: string;
   public type: string;
   public category: string;
