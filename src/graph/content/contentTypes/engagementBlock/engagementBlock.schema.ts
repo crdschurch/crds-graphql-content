@@ -1,8 +1,10 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
-  extend type Engagement @key(fields: "id") {
-    id: ID! @external
+  type Engagement @key(fields: "slug") {
+    id: ID!
+    slug: String!
+    type: String!
     title: String
     contentType: String!
     description : String
@@ -10,5 +12,12 @@ export default gql`
     tooltipEarnedContent: String
     tooltipUnearnedContent: String
     disabled: Boolean
+  }
+
+  extend type User @key(fields: "id") {
+    id: ID! @external
+    engagements: [Engagement]
+    badges: [Engagement]
+    activities: [Engagement]
   }
 `;

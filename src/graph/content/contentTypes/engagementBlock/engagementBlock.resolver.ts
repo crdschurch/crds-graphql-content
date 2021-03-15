@@ -2,77 +2,79 @@ import { IContext } from "../../../context/context.interface";
 import EngagementBlock from "./engagementBlock";
 
 const resolverMap: any = {
-  Engagement: {
-    title: async (engagement, args, { authData, dataSources }: IContext) => {
-      var engagementBlocks = (await dataSources.contentConnector.getContent({
-        content_type: "engagement_block",
-        enagement_id: engagement.id,
-      })) as EngagementBlock[];
-      return engagementBlocks?.find(() => true)?.title;
-    },
-    contentType: async (
-      engagement,
-      args,
+  Query: {
+    engagements: async (
+      _user,
+      _args,
       { authData, dataSources }: IContext
-    ) => {
-      var engagementBlocks = (await dataSources.contentConnector.getContent({
+    ): Promise<EngagementBlock[]> => {
+      var engagements = (await dataSources.contentConnector.getContent({
         content_type: "engagement_block",
-        enagement_id: engagement.id,
+        ..._args,
       })) as EngagementBlock[];
-      return engagementBlocks?.find(() => true)?.contentType;
+      return engagements;
     },
-    description: async (
-      engagement,
-      args,
+    badges: async (
+      _user,
+      _args,
       { authData, dataSources }: IContext
-    ) => {
-      var engagementBlocks = (await dataSources.contentConnector.getContent({
+    ): Promise<EngagementBlock[]> => {
+      var engagements = (await dataSources.contentConnector.getContent({
         content_type: "engagement_block",
-        enagement_id: engagement.id,
+        ..._args,
+        ...{ ..._args, type: "badge" },
       })) as EngagementBlock[];
-      return engagementBlocks?.find(() => true)?.description;
+      return engagements;
     },
-    targetUrl: async (
-      engagement,
-      args,
+    activities: async (
+      _user,
+      _args,
       { authData, dataSources }: IContext
-    ) => {
-      var engagementBlocks = (await dataSources.contentConnector.getContent({
+    ): Promise<EngagementBlock[]> => {
+      var engagements = (await dataSources.contentConnector.getContent({
         content_type: "engagement_block",
-        enagement_id: engagement.id,
+        ...{ ..._args, type: "activity" },
       })) as EngagementBlock[];
-      return engagementBlocks?.find(() => true)?.targetUrl;
-    },
-    tooltipEarnedContent: async (
-      engagement,
-      args,
-      { authData, dataSources }: IContext
-    ) => {
-      var engagementBlocks = (await dataSources.contentConnector.getContent({
-        content_type: "engagement_block",
-        enagement_id: engagement.id,
-      })) as EngagementBlock[];
-      return engagementBlocks?.find(() => true)?.tooltipEarnedContent;
-    },
-    tooltipUnearnedContent: async (
-      engagement,
-      args,
-      { authData, dataSources }: IContext
-    ) => {
-      var engagementBlocks = (await dataSources.contentConnector.getContent({
-        content_type: "engagement_block",
-        enagement_id: engagement.id,
-      })) as EngagementBlock[];
-      return engagementBlocks?.find(() => true)?.tooltipUnearnedContent;
-    },
-    disabled: async (engagement, args, { authData, dataSources }: IContext) => {
-      var engagementBlocks = (await dataSources.contentConnector.getContent({
-        content_type: "engagement_block",
-        enagement_id: engagement.id,
-      })) as EngagementBlock[];
-      return engagementBlocks?.find(() => true)?.disabled;
+      return engagements;
     },
   },
+  User: {
+    engagements: async (
+      _user,
+      _args,
+      { authData, dataSources }: IContext
+    ): Promise<EngagementBlock[]> => {
+      var engagements = (await dataSources.contentConnector.getContent({
+        content_type: "engagement_block",
+        ..._args,
+      })) as EngagementBlock[];
+      return engagements;
+    },
+    badges: async (
+      _user,
+      _args,
+      { authData, dataSources }: IContext
+    ): Promise<EngagementBlock[]> => {
+      var engagements = (await dataSources.contentConnector.getContent({
+        content_type: "engagement_block",
+        ..._args,
+        ...{ ..._args, type: "badge" },
+      })) as EngagementBlock[];
+      return engagements;
+    },
+    activities: async (
+      _user,
+      _args,
+      { authData, dataSources }: IContext
+    ): Promise<EngagementBlock[]> => {
+      var engagements = (await dataSources.contentConnector.getContent({
+        content_type: "engagement_block",
+        ...{ ..._args, type: "activity" },
+      })) as EngagementBlock[];
+      return engagements;
+    },
+  },
+  Engagement: {},
 };
 
 export default resolverMap;
